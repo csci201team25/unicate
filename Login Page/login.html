@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <title>LogIn</title>
+    <style>
+        #header {
+            height: 200px;
+            background-position: center;
+            background-size: cover;
+        }
+        h1 {
+            margin-top: 50px;
+            line-height: 200px;
+            font-size: 3em;
+            margin-left: 130px;
+            color: rgb(255, 255, 255);
+            text-shadow: 0px 0px 10px #000;
+        }
+        body {
+            background-image: url("Background.png");
+            background-size: cover;
+            width: 1000px;
+            margin: 0px;
+        }
+        form {
+            margin-top: 25px;
+            margin-right: -550px;
+            margin-left: 150px;
+        }
+        label {
+            color: rgb(255, 255, 255);
+            text-shadow: 0px 0px 10px #000;
+            font-size: 1.5em;
+        }
+        #info {
+            color: rgb(255, 255, 255);
+            text-shadow: 0px 0px 20px #000;
+            font-size: 1.2em;
+            margin-left: 700px;
+            margin-right: -100px;
+        }
+        #content {
+            display: flex;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="header" class="container-fluid">
+        <div class="row">
+            <h1 class="col-12">Login</h1>
+        </div>
+    </div>
+    <div id="content">
+        <div id="loginForm">
+            <form id="login-form">
+                <div class="mb-3">
+                    <label for="UserName" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="UserName">
+                    <small id="UserName-error" class="form-text text-danger"></small>
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password">
+                    <small id="password-error" class="form-text text-danger"></small>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+        <div id="info">
+            <p>
+                Welcome to our website! We are creating a web application where students can input a list of school names and the application will output the calendars for those schools. The program will also compare the available vacation times on the calendars to output a list of dates during which school vacation days overlap. The program will also check the surrounding locations for each school to find potential meeting locations. Users are required to login to save the output information and make posts about their vacation locations.
+            </p>
+        </div>
+    </div>
+    <script>
+        document.querySelector("#login-form").onsubmit = function () {
+            let validity = true
+            const name = document.querySelector("#UserName").value.trim()
+            if (/^$/.test(name)) {
+                validity = false
+                document.querySelector("#UserName-error").innerHTML = "Username cannot be empty."
+            }
+            else {
+                document.querySelector("#UserName-error").innerHTML = ""
+            }
+            const password = document.querySelector("#password").value.trim()
+            if (/^$/.test(password)) {
+                validity = false
+                document.querySelector("#password-error").innerHTML = "Password cannot be empty."
+            }
+            else {
+                document.querySelector("#password-error").innerHTML = ""
+            }
+            return false
+        }
+    </script>
+</body>
+
+</html>
