@@ -1,0 +1,132 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+
+/* font uniquifiers */
+.noto-sans-bold {
+    font-family: "Noto Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-variation-settings:
+      "wdth" 100;
+}
+
+.noto-sans-super-bold {
+    font-family: "Noto Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: normal;
+    font-variation-settings:
+      "wdth" 100;
+}
+
+
+.noto-sans-regular {
+    font-family: "Noto Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-variation-settings:
+      "wdth" 100;
+}
+
+.noto-sans-light {
+    font-family: "Noto Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+    font-variation-settings:
+      "wdth" 100;
+}
+
+/* so the body has the same font */
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: "Noto Sans", sans-serif;
+    padding: 20px 40px;
+    min-height: 100vh;
+    color:white
+}
+
+/* headings, paragraphs, and more */
+h1 {
+    text-align: center;
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 900;
+}
+
+h2 {
+    text-align: center;
+}
+
+h3 {
+    text-align: center;
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 700;
+}
+
+h4 {
+    text-align: center;
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 500;
+}
+
+h5 {
+    text-align: center;
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 400;
+}
+
+h6 {
+    text-align: center;
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 400;
+}
+
+form {
+    margin: 0 auto;              /* center horizontally */
+    padding: 40px;               /* add padding inside the form */
+    max-width: 400px;            
+    display: flex;
+    flex-direction: column;
+    gap: 16px;                   /* spacing between form elements */
+    background-color: rgba(255, 255, 255, 0.05); /* optional: light background */
+    border-radius: 12px; 
+}
+
+/* classes */
+.inputfield {
+    font-family: "Noto Sans", sans-serif;
+    padding: 10px;
+    border: 1px solid white;
+    border-radius: 10px;
+    background-color: transparent;
+    color: white; 
+    font-size: 12px;
+  }
+  
+  .inputfield::placeholder {
+    color: rgba(255, 255, 255, 0.7); 
+  }
+  
+  .inputfield:focus {
+    outline: none;
+    box-shadow: 0 0 5px white;
+}
+
+.formbutton {
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 500;
+    padding: 10px 20px;
+    margin: 10px 10px 0 0;
+    border: none;
+    border-radius: 8px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    color: white;
+    background-color: #1E2931;    
+}
