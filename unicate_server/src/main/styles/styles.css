@@ -86,7 +86,7 @@ h6 {
     font-weight: 400;
 }
 
-form {
+.login-form {
     margin: 0 auto;              /* center horizontally */
     padding: 40px;               /* add padding inside the form */
     max-width: 400px;            
@@ -129,4 +129,92 @@ form {
     transition: background-color 0.2s ease;
     color: white;
     background-color: #1E2931;    
+}
+
+/* navbar stuff  */
+.navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: "Noto Sans", sans-serif;
+    padding: 20px 40px;
+    color: white;
+}
+
+.navbar-left {
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.navbar-right {
+    display: flex;
+    gap: 24px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: white;
+    font-weight: 400;
+    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 6px;
+}
+
+.nav-link.outlined {
+    border: 1px solid white;
+}
+
+
+/* for post page  */
+.main-columns {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    max-width: 1200px;
+    width: 100%;
+    margin: 60px auto;
+    gap: 40px;
+    padding: 0 40px;
+    color: black;
+}
+
+.left-column,
+.right-column {
+    flex: 1;
+}
+
+.left-column h2,
+.right-column h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.left-column p,
+.right-column p {
+    font-size: 14px;
+    text-align: left;
+}
+
+.comment-form-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: center;
+    color: black;
+}  
+
+.comment-form {
+    width: 100%;
+    max-width: 1200px; 
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+    color: black;
 }
