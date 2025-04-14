@@ -9,10 +9,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
 /*** Determines what webpage is returned when a URL on the server is accessed ***/
 @Controller
 public class MainController {
-    @RequestMapping(value="/", method=RequestMethod.GET)
+    @RequestMapping(value="/hello-world", method=RequestMethod.GET)
     @ResponseBody
     public String index() {
         return "<h3>Hello world!</h3>";
     }
-    
+
+    @RequestMapping("/")
+    public String homePage() {
+    	return "Home";
+    }
+
+    @RequestMapping(value="/AddSchool.html", method=RequestMethod.GET)
+    public String addSchoolPage() {
+    	return "AddSchool";
+    }
+
+    @RequestMapping(value="/Login.html", method=RequestMethod.GET)
+    public String loginPage() {
+    	return "login";
+    }
 }
