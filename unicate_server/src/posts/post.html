@@ -116,6 +116,47 @@
         </form>
     </div>
 
+    <script>
+      document.getElementById("comment-form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+    
+        const comment = document.getElementById("comment").value;
+    
+        // currently hard-coded, in future get it from page context
+        const userId = 1;   // TEMP: Replace with actual logged-in user's ID
+        const locId = 123;  // TEMP: Replace with actual event/location ID
+    
+        if (!comment.trim()) {
+          alert("Comment cannot be empty.");
+          return;
+        }
+    
+        try {
+          const res = await fetch("/comments", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+              text: comment,
+              userId: userId,
+              locId: locId
+            })
+          });
+    
+          if (res.ok) {
+            alert("Comment posted!");
+            document.getElementById("comment").value = "";
+          } else {
+            alert("Failed to post comment.");
+          }
+        } catch (error) {
+          console.error("Error posting comment:", error);
+          alert("Server error occurred.");
+        }
+      });
+    </script>
+    
 </body>
 </html>
 
