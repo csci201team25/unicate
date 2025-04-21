@@ -4,6 +4,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
 import jakarta.persistence.*;
 
 /* Representation of the Universities Table in the DB */
@@ -52,12 +57,14 @@ public class University {
 	
 	public ArrayList<DateRange> getDateRanges(){
 		ArrayList<DateRange> dateList = new ArrayList<DateRange>();
-
-		String[] dates = this.calendarDates.split(", ");
+		
+		JsonArray jsonArr = JsonParser.parseString(this.calendarDates).getAsJsonArray();
+		
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		for(String dateString : dates) {
-			LocalDate newDate = LocalDate.parse(dateString, formatter);
-			dateList.add(new DateRange(newDate, newDate));
+		for(JsonElement dateString : jsonArr) {
+			LocalDate startDate = LocalDate.parse(dateString.getAsJsonObject().get("start_date").getAsString(), formatter);
+			LocalDate endDate = LocalDate.parse(dateString.getAsJsonObject().get("end_date").getAsString(), formatter);
+			dateList.add(new DateRange(startDate, endDate));
 		}
 		
 		return dateList;

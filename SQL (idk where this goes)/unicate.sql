@@ -5,7 +5,7 @@ USE unicate;
 -- DROP TABLE IF EXISTS Users;
 -- DROP TABLE IF EXISTS Universities;
 -- DROP TABLE IF EXISTS UserUniversity;
--- DROP TABLE IF EXISTS UserActivity;
+-- DROP TABLE IF EXISTS UserActivity;commentscommentsuniversities
 -- DROP TABLE IF EXISTS Comments;
 
 CREATE TABLE Users (
@@ -26,7 +26,7 @@ CREATE TABLE Universities (
 CREATE TABLE DateRange (
     dateID INT AUTO_INCREMENT PRIMARY KEY,
     startDate DATE NOT NULL,
-    endDate DATE NOT NULL,
+    endDate DATE NOT NULL
 );
 
 CREATE TABLE uniDates (
@@ -59,8 +59,8 @@ CREATE TABLE UserActivity (
     actID INT AUTO_INCREMENT PRIMARY KEY,
     postName VARCHAR(100) NOT NULL,
     userID INT,
-    FOREIGN KEY (userID) REFERENCES Users(userID)
-    avgRating FLOAT DEFAULT 0,
+    FOREIGN KEY (userID) REFERENCES Users(userID),
+    avgRating FLOAT DEFAULT 0
 );
 
 
@@ -73,5 +73,3 @@ CREATE TABLE Comments (
     FOREIGN KEY (userID) REFERENCES Users(userID),
     FOREIGN KEY (actID) REFERENCES UserActivity(actID)
 );
-
-
