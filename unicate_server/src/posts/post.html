@@ -3,14 +3,14 @@
 <head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="../main/styles/styles.css">
+    <link rel="stylesheet" href="styles.css">
     <title>View Post</title>
     <style>
     .hero-banner {
       position: relative;
       height: 400px;
       width: 100%;
-      background-image: url('bovard.jpg'); /* Replace with your actual image */
+      background-image: url('bovard.jpg');
       background-size: cover;
       background-position: center;
       z-index: 0;
@@ -102,14 +102,12 @@
         <div class="right-column">
         <h2>What are People Saying?</h2>
         <div class="comments-section">
-            <p><strong>@alex:</strong> I love this place! I go here all the time</p>
-            <p><strong>@bob:</strong> Lowkey I do not like it here</p>
         </div>
         </div>
     </div>
 
     <div class="comment-form-container">
-        <form class="comment-form">
+        <form id="comment-form">
         <label for="comment" class="formlabel">Comment</label>
         <textarea id="comment" class="comment-box" rows="4" placeholder="What did you think?"></textarea>
         <button class="formbutton" type="submit">Post</button>
@@ -117,46 +115,70 @@
     </div>
 
     <script>
-      document.getElementById("comment-form").addEventListener("submit", async (e) => {
-        e.preventDefault();
-    
-        const comment = document.getElementById("comment").value;
-    
-        // currently hard-coded, in future get it from page context
-        const userId = 1;   // TEMP: Replace with actual logged-in user's ID
-        const locId = 123;  // TEMP: Replace with actual event/location ID
-    
-        if (!comment.trim()) {
-          alert("Comment cannot be empty.");
-          return;
-        }
-    
-        try {
-          const res = await fetch("/comments", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-              text: comment,
-              userId: userId,
-              locId: locId
-            })
-          });
-    
-          if (res.ok) {
-            alert("Comment posted!");
-            document.getElementById("comment").value = "";
-          } else {
-            alert("Failed to post comment.");
-          }
-        } catch (error) {
-          console.error("Error posting comment:", error);
-          alert("Server error occurred.");
-        }
-      });
-    </script>
-    
+    async function loadComments() {
+	    const actId = 1;  // TEMP: dynamically get actual location ID later
+
+    	  try {
+    	    const res = await fetch(`comment-servlet?actId=${actId}`);
+    	    if (res.ok) {
+    	      const comments = await res.json();
+    	      const commentsSection = document.querySelector(".comments-section");
+    	      commentsSection.innerHTML = ""; // clear old comments
+
+    	      comments.forEach(comment => {
+    	        const p = document.createElement("p");
+    	        p.innerHTML = `<strong>@${comment.username}:</strong> ${comment.bodyText}`;
+    	        commentsSection.appendChild(p);
+    	      });
+    	    } else {
+    	      console.error("Failed to load comments.");
+    	    }
+    	  } catch (error) {
+    	    console.error("Error loading comments:", error);
+    	  }
+    	}
+	
+	  document.getElementById("comment-form").addEventListener("submit", async (e) => {
+	    e.preventDefault();
+	
+	    const comment = document.getElementById("comment").value;
+	    const userId = 1;   // TEMP: dynamically get actual logged-in user ID later
+	    const actId = 1;   // TEMP: dynamically get actual activity ID later
+	
+	    if (!comment.trim()) {
+	      alert("Comment cannot be empty.");
+	      return;
+	    }
+	
+	    try {
+	      const res = await fetch("comment-servlet", {
+	        method: "POST",
+	        headers: {
+	          "Content-Type": "application/json"
+	        },
+	        body: JSON.stringify({
+	          text: comment,
+	          userId: userId,
+	          actId: actId
+	        })
+	      });
+	
+	      if (res.ok) {
+	        alert("Comment posted!");
+	        document.getElementById("comment").value = "";
+	        await loadComments(); // reloads comments after posting
+	      } else {
+	        alert("Failed to post comment.");
+	      }
+	    } catch (error) {
+	      console.error("Error posting comment:", error);
+	      alert("Server error occurred.");
+	    }
+	  });
+	
+	  // load comments when the page first loads
+	  window.addEventListener("DOMContentLoaded", loadComments);
+	</script>    
 </body>
 </html>
 
