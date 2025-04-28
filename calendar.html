@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Calendar Display</title>
+    <link rel="stylesheet" href="calendar.css">
+</head>
+<body>
+    <div class="calendar-container">
+        <h1>Calendar Display for Spring Break in 2025</h1>
+        <h2>March</h2>
+        <div class="calendar">
+            <div class="calendar-titles">
+                <div class="weekday">Sun</div>
+                <div class="weekday">Mon</div>
+                <div class="weekday">Tues</div>
+                <div class="weekday">Wed</div>
+                <div class="weekday">Thurs</div>
+                <div class="weekday">Fri</div>
+                <div class="weekday">Sat</div>
+            </div>
+            <div class="calendar-days">
+                <!-- February -->
+                <div class="day prev-month" data-date="2025-02-23">23</div>
+                <div class="day prev-month" data-date="2025-02-24">24</div>
+                <div class="day prev-month" data-date="2025-02-25">25</div>
+                <div class="day prev-month" data-date="2025-02-26">26</div>
+                <div class="day prev-month" data-date="2025-02-27">27</div>
+                <div class="day prev-month" data-date="2025-02-28">28</div>
+                <!-- March -->
+                <div class="day" data-date="2025-03-01">1</div>
+                <div class="day" data-date="2025-03-02">2</div>
+                <div class="day" data-date="2025-03-03">3</div>
+                <div class="day" data-date="2025-03-04">4</div>
+                <div class="day" data-date="2025-03-05">5</div>
+                <div class="day" data-date="2025-03-06">6</div>
+                <div class="day" data-date="2025-03-07">7</div>
+                <div class="day" data-date="2025-03-08">8</div>
+                <div class="day" data-date="2025-03-09">9</div>
+                <div class="day" data-date="2025-03-10">10</div>
+                <div class="day" data-date="2025-03-11">11</div>
+                <div class="day" data-date="2025-03-12">12</div>
+                <div class="day" data-date="2025-03-13">13</div>
+                <div class="day" data-date="2025-03-14">14</div>
+                <div class="day" data-date="2025-03-15">15</div>
+                <div class="day" data-date="2025-03-16">16</div>
+                <div class="day" data-date="2025-03-17">17</div>
+                <div class="day" data-date="2025-03-18">18</div>
+                <div class="day" data-date="2025-03-19">19</div>
+                <div class="day" data-date="2025-03-20">20</div>
+                <div class="day" data-date="2025-03-21">21</div>
+                <div class="day" data-date="2025-03-22">22</div>
+                <div class="day" data-date="2025-03-23">23</div>
+                <div class="day" data-date="2025-03-24">24</div>
+                <div class="day" data-date="2025-03-25">25</div>
+                <div class="day" data-date="2025-03-26">26</div>
+                <div class="day" data-date="2025-03-27">27</div>
+                <div class="day" data-date="2025-03-28">28</div>
+                <div class="day" data-date="2025-03-29">29</div>
+                <div class="day" data-date="2025-03-30">30</div>
+                <div class="day" data-date="2025-03-31">31</div>
+                <!-- April -->
+                <div class="day next-month" data-date="2025-04-01">1</div>
+                <div class="day next-month" data-date="2025-04-02">2</div>
+                <div class="day next-month" data-date="2025-04-03">3</div>
+                <div class="day next-month" data-date="2025-04-04">4</div>
+                <div class="day next-month" data-date="2025-04-05">5</div>
+              </div>              
+        </div>
+    </div>
+    <script>
+        // https://stackoverflow.com/questions/12330086/how-to-loop-through-selected-elements-with-document-queryselectorall
+        const overlapDates = ["2025-03-17", "2025-03-18", "2025-03-19"];
+        days = document.querySelectorAll('.day')
+        for (let day of days) {
+            const date = day.getAttribute('data-date');
+            if (overlapDates.includes(date)) {
+                day.classList.add('overlap-day');
+            }
+        }
+    </script>
+</body>
+</html> 
