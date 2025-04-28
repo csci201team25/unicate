@@ -78,13 +78,13 @@
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
-		document.querySelector("#logout").onclick = function () {
-			localStorage.clear()
-			console.log("Logged Out")
-			window.location.href = "login.html"; // replace with home page
-		}
-		document.querySelector("#submit").onclick = function () {
-			let submission = true
+	document.querySelector("#logout").onclick = function () {
+	    localStorage.clear()
+	    console.log("Logged Out")
+	    window.location.href = "login.html"; // replace with home page
+	}
+	document.querySelector("#submit").onclick = function () {
+	    let submission = true
             const name = document.querySelector("#UserName").value.trim()
             const password = document.querySelector("#password").value.trim()
             if (/^$/.test(name) || /^$/.test(password)) {
@@ -107,7 +107,7 @@
 	                    if (data === "verified") {
 	                    	localStorage.setItem("login", "yes");
 	                    	console.log("Logged In")
-	                		window.location.href = "login.html"; // replace with add universities page
+	                	window.location.href = "login.html"; // replace with add universities page
 	                    }
 	                    else {
 	                    	alert("Incorrect Information.");
