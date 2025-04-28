@@ -107,6 +107,7 @@
 	                    if (data === "verified") {
 	                    	localStorage.setItem("login", "yes");
 	                    	console.log("Logged In")
+				localStorage.setItem("username", "" + name);
 	                	window.location.href = "login.html"; // replace with add universities page
 	                    }
 	                    else {
