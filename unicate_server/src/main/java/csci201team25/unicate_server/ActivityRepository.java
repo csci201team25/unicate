@@ -7,7 +7,7 @@ import org.springframework.data.repository.query.Param;
 
 /* Repository for communicating with Universities Table in the DB */
 public interface ActivityRepository extends JpaRepository<Activity, Long>{
-	List<Activity> findByActivityName(String activityName);
-	List<Activity> findByActivityLocation(String locationName);
+	List<Activity> findByActName(String activityName);
+	List<Activity> findByUniversity_UniversityName(String universityName);
 	List<Activity> findAll();
 }

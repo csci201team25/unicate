@@ -25,21 +25,25 @@ public class Activity {
 	public void setactName(String actName) {
 		this.actName =  actName;
 	}
-
-	@Column(name="actLocation")
-	private String actLocation;
 	
-	public String getactLocation() {
-		return actLocation;
-	}
-
-	public void setactLocation(String actLocation) {
-		this.actLocation = actLocation;
-	}
+//	@Column(name="actLocation")
+//	private String actLocation;
+//	
+//	public String getactLocation() {
+//		return actLocation;
+//	}
+//
+//	public void setactLocation(String actLocation) {
+//		this.actLocation = actLocation;
+//	}
+	
+	@ManyToOne
+	@JoinColumn(name = "uniID")
+	private University university;
 
 	@Override
 	public String toString() {
-		String output = "Activity Entry\nID: %s; Activity Name: %s\n; Location: %s\n";
-	    return String.format(output, actID, actName, actLocation);
+		String output = "Activity EntryID: %s; Activity Name: %s; For Uni: %s\n";
+	    return String.format(output, actID, actName, university.getUniversityName());
 	}
 }

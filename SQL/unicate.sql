@@ -73,3 +73,11 @@ CREATE TABLE Comments (
     FOREIGN KEY (userID) REFERENCES Users(userID),
     FOREIGN KEY (actID) REFERENCES UserActivity(actID)
 );
+
+
+CREATE TABLE Activities (
+	actID INT AUTO_INCREMENT PRIMARY KEY,
+    actName VARCHAR(100) NOT NULL,
+    uniID INT,
+    FOREIGN KEY (uniID) REFERENCES Universities(uniID)
+);

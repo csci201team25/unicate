@@ -13,12 +13,14 @@ public class UnicateServerApplication {
 	}
 	
     @Bean
-    CommandLineRunner printUniversityNames(UniversityRepository universityRepository) {
+    CommandLineRunner printUniversityNames(UniversityRepository uniRepo, ActivityRepository actRepo) {
         return args -> {
             System.out.println("== University table contents on Startup ==");
-            universityRepository.findAll().forEach(System.out::println);
+            uniRepo.findAll().forEach(System.out::println);
             System.out.println("== Find university by name test USC ==");
-            System.out.println(universityRepository.findByUniversityName("University of Southern California"));
+            System.out.println(uniRepo.findByUniversityName("University of Southern California"));
+            System.out.println("== Find Activities by name test USC ==");
+            System.out.println(actRepo.findByUniversity_UniversityName("University of Southern California"));
         };
     }
 }
