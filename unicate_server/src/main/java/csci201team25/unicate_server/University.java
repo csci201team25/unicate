@@ -18,11 +18,11 @@ import jakarta.persistence.*;
 public class University {
 	@Id
 	@Column(name="uniID")
-	private Long uniID;
-	public Long getUniID() {
+	private int uniID;
+	public int getUniID() {
 		return uniID;
 	}
-	public void setUniID(Long uniID) {
+	public void setUniID(int uniID) {
 		this.uniID = uniID;
 	}
 
@@ -68,5 +68,10 @@ public class University {
 		}
 		
 		return dateList;
+	}
+	
+	// for when we only have spring break date in db
+	public DateRange getSpringBreakDateRange() {
+		return getDateRanges().getFirst();
 	}
 }
