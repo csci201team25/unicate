@@ -13,6 +13,7 @@ body {
     width: 100%;
     border-radius: 8px;
     padding: 24px;
+    max-width: 1000px;
 }
 
 h1 {
@@ -57,12 +58,32 @@ h2 {
 .day {
     background-color: #173F56;
     aspect-ratio: 1;
-    padding: 8px;
     border-radius: 4px;
+    font-size: 30px;
+    display: flex;
+    justify-content: right;
+    align-items: top;
+    padding: 6px;
+    position: relative;
 }
 
 .overlap-day {
     background-color: #de8100 !important;
+    color: black;
+}
+
+.semi-overlap-day {
+  	background-color: rgb(248, 195, 114) !important;
+    color: black;
+}
+
+.day-count {
+    display: inline-block;
+    position: absolute;
+    bottom: 7px;
+    left: 7px;
+    font-size: 20px;
+    border-radius: 4px;
     color: black;
 }
 
