@@ -85,7 +85,7 @@
 	document.querySelector("#logout").onclick = function () {
 	    localStorage.clear()
 	    console.log("Logged Out")
-	    window.location.href = "login.html"; // replace with home page
+	    window.location.href = "Home.html";
 	}
 	document.querySelector("#submit").onclick = function () {
 	    let submission = true
@@ -112,10 +112,10 @@
 	                    	localStorage.setItem("login", "yes");
 	                    	console.log("Logged In")
 				localStorage.setItem("username", "" + name);
-	                	window.location.href = "login.html"; // replace with add universities page
+	                	window.location.href = "add-university.html";
 	                    }
 	                    else {
-	                    	alert("Incorrect Information.");
+	                    	document.querySelector("#password-error").innerHTML = "Incorrect Information."
 	                    }
 			    	},
 		            error: function (e) {
