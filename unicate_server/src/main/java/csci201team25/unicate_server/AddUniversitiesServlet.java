@@ -63,24 +63,23 @@ public class AddUniversitiesServlet extends HttpServlet {
 		// Closing objects
 		// https://stackoverflow.com/questions/22671697/try-try-with-resources-and-connection-statement-and-resultset-closing
 		finally {
-		    try {
-		        if (conn != null) conn.close();
-		    } catch (SQLException sqle) {
-		    	System.out.println ("SQLException: " + sqle.getMessage());		    
-		    
-		    }
-		    
-		    try {
-		        if (st != null) st.close();
-		    } catch (SQLException sqle) {
-		    	System.out.println ("SQLException: " + sqle.getMessage());	
-		    }
-		    
-		    try {
-		        if (rs != null) rs.close();
-		    } catch (SQLException sqle) {
-		    	System.out.println ("SQLException: " + sqle.getMessage());	
-		    }
+			try {
+				if (conn != null) conn.close();
+			} catch (SQLException sqle) {
+				System.out.println ("SQLException: " + sqle.getMessage());		    
+			}
+
+			try {
+				if (st != null) st.close();
+			} catch (SQLException sqle) {
+				System.out.println ("SQLException: " + sqle.getMessage());		    
+			}
+
+			try {
+				if (rs != null) rs.close();
+			} catch (SQLException sqle) {
+				System.out.println ("SQLException: " + sqle.getMessage());		    
+			}
 		}	
 	} 
 }
