@@ -31,7 +31,7 @@ public class MainController {
     	return "login";
     }
 
-    @GetMapping(value="/register.html")
+    @GetMapping(value={"/register.html", "/Register.html"})
     public String registerPage() { return "register"; }
 
     @GetMapping(value="/calendar.html")
