@@ -96,7 +96,7 @@
     <div class="main-columns">
         <div class="left-column">
         <h2>Description</h2>
-        <p>Blah blah blah.</p>
+        <p id="activity-description">Loading description...</p>
         </div>
         <div class="right-column">
         <h2>What are People Saying?</h2>
@@ -127,6 +127,7 @@
             document.querySelector(".hero-title").textContent = activity.actName;
             document.querySelector(".hero-subtitle").textContent = `${activity.university.universityName} • ${activity.actLocation}`;
             document.getElementById("hero-banner").style.backgroundImage = `url('${activity.actImage}')`;
+            document.getElementById("activity-description").textContent = activity.description || "No description available.";
           }
         } catch (err) {
           console.error("Failed to load activity details:", err);

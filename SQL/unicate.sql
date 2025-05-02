@@ -79,7 +79,8 @@ CREATE TABLE Activities (
     actID INT AUTO_INCREMENT PRIMARY KEY,
     actName VARCHAR(100) NOT NULL,
     actLocation VARCHAR(255),         
-    actImage VARCHAR(500),             
+    actImage VARCHAR(500),   
+    description TEXT,          
     uniID INT,
     FOREIGN KEY (uniID) REFERENCES Universities(uniID)
 );
