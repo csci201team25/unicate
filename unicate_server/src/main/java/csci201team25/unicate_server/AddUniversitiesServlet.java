@@ -6,7 +6,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-//import javax.json.*;
+import com.google.gson.*;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -39,22 +40,21 @@ public class AddUniversitiesServlet extends HttpServlet {
 			rs = st.executeQuery("SELECT uniID, UniversityName FROM Universities");
 			
 			// sending uni ID and name to frontend as JSON object
+			Map<String,String> uniMap = new HashMap<>();
+			String id = "";
+			String uni_name = "";
+			while (rs.next()) {
+				id = rs.getString("uniID");
+				uni_name = rs.getString("UniversityName");
+				uniMap.put(id, uni_name);
+			} 			
 			
-			// note from himanshu: same json problems with this too
+            		Gson gson = new GsonBuilder().create();
+			String json = gson.toJson(uniMap);
 			
-//		!	JsonObjectBuilder json_builder = Json.createObjectBuilder();
-//			String id = "";
-//			String uni_name = "";
-//			while (rs.next()) {
-//				id = rs.getString("uniID");
-//				uni_name = rs.getString("UniversityName");
-//				json_builder.add(id, uni_name);
-//			} 
-			// System.out.println("JSON Builder CP: " + json_builder.build().toString());
-//			
-//			response.setContentType("application/json");
-//			response.setCharacterEncoding("UTF-8");
-//			response.getWriter().write(json_builder.build().toString());
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			response.getWriter().write(json);
 		} 
 		
 		// catching errors 
