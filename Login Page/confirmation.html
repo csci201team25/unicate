@@ -4,6 +4,8 @@
   <link
     rel="stylesheet"
     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../unicate_server/src/main/styles/navbar.css">
+
   <title>Confirmation</title>
   <style>
     #header {
@@ -42,6 +44,15 @@
 </head>
 
 <body>
+  <nav class="navbar">
+    <div class="navbar-left">
+        <a href="home.html" class="nav-link">Campfire</a>
+    </div>
+    <div class="navbar-right">
+        <!-- filled by navbar.js -->
+    </div>
+  </nav>
+
   <div id="header" class="container-fluid">
     <div class="row">
       <h1 class="col-12">School Added!</h1>
@@ -55,5 +66,7 @@
       <a href="AddSchool.html" class="btn btn-primary">Add Another School</a>
     </div>
   </div>
+
+  <script src="navbar.js"></script>
 </body>
 </html>

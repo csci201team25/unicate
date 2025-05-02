@@ -131,41 +131,6 @@ h6 {
     background-color: #1E2931;    
 }
 
-/* navbar stuff  */
-.navbar {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-family: "Noto Sans", sans-serif;
-    padding: 20px 40px;
-    color: white;
-}
-
-.navbar-left {
-    font-weight: 700;
-    font-size: 14px;
-}
-
-.navbar-right {
-    display: flex;
-    gap: 24px;
-}
-
-.nav-link {
-    text-decoration: none;
-    color: white;
-    font-weight: 400;
-    font-size: 14px;
-    padding: 6px 12px;
-    border-radius: 6px;
-}
-
-.nav-link.outlined {
-    border: 1px solid white;
-}
-
-
 /* for post page  */
 .main-columns {
     display: flex;

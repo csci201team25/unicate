@@ -1,59 +1,83 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <title>Home</title>
-    <style>
-        #header {
-            height: 200px;
-            background-position: center;
-            background-size: cover;
-        }
-        h1 {
-            margin-top: 100px;
-            line-height: 200px;
-            font-size: 3em;
-            text-align: center;
-            margin-left: 150px;
-            color: rgb(255, 255, 255);
-            text-shadow: 0px 0px 10px #000;
-        }
-        body {
-            background-image: url("Background.png");
-            background-size: cover;
-            width: 1000px;
-            margin: 0px;
-        }
-        form {
-            margin-top: 125px;
-            margin-left: 550px;
-        }
-        #line {
-            margin-left: -250px;
-            margin-top: -50px;
-            margin-bottom: 50px;
-        }
-        #sparking {
-            background-color: rgb(60, 24, 14);
-        }
-    </style>
+  <title>Home</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="../unicate_server/src/main/styles/navbar.css">
+  <style>
+    body {
+      background-image: url("Background.png");
+      background-size: cover;
+      background-position: center;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #header {
+      height: 200px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #header h1 {
+      color: white;
+      text-shadow: 0 0 10px #000;
+      font-size: 3rem;
+      text-align: center;
+    }
+
+    #content {
+      text-align: center;
+    }
+
+    #sparking {
+      background-color: rgb(60, 24, 14);
+    }
+
+    .btn {
+      width: 200px;
+      margin: 15px;
+    }
+
+    hr {
+      width: 60%;
+      border: 2px solid rgb(206, 125, 27);
+      margin: 20px auto;
+    }
+  </style>
 </head>
 
 <body>
-    <div id="header" class="container-fluid">
-        <div class="row">
-            <h1 class="col-12">Welcome to Campfire</h1>
-        </div>
+  <nav class="navbar">
+    <div class="navbar-left">
+      <a href="home.html" class="nav-link">Campfire</a>
     </div>
-    <div id="content">
-        <div id="addSchoolsForm">
-            <form id="addSchools-form" action="AddSchool.html">
-                <hr id="line" style="height:2px;border-width:10;color:rgb(206, 125, 27);background-color:rgb(206, 125, 27)">
-                <button id="sparking" type="submit" class="btn btn-primary">Spark Something</button>
-            </form>
-        </div>
+    <div class="navbar-right">
+      <!-- filled by navbar.js -->
     </div>
-</body>
+  </nav>
 
+  <div id="header">
+    <h1>Welcome to Campfire</h1>
+  </div>
+
+  <div id="content">
+    <form action="AddSchool.html">
+      <button id="sparking" type="submit" class="btn btn-primary">Spark Something</button>
+    </form>
+
+    <hr />
+
+    <form action="activities.html">
+      <button type="submit" class="btn btn-secondary">Explore Activities</button>
+    </form>
+  </div>
+
+  <script src="navbar.js"></script>
+</body>
 </html>

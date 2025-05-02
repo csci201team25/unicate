@@ -3,9 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Calendar Display</title>
-    <link rel="stylesheet" href="Calendar.css">
+    <link rel="stylesheet" href="../unicate_server/src/main/styles/navbar.css">
+    <link rel="stylesheet" href="../unicate_server/src/main/styles/Calendar.css">
 </head>
 <body>
+    <!-- for some reason the navbar is weirdly wide on this page so the width is set manually -->
+    <nav class="navbar" style="max-width: 1380px;">
+        <div class="navbar-left">
+            <a href="home.html" class="nav-link">Campfire</a>
+        </div>
+        <div class="navbar-right">
+            <!-- filled by navbar.js -->
+        </div>
+    </nav>
+
     <div class="calendar-container">
         <h1>Calendar Display for Spring Break in 2025</h1>
         <h2>March</h2>
@@ -118,5 +129,6 @@
 	    	})
 		.catch(error => console.error('Error:', error));
 </script>
+<script src="navbar.js"></script>
 </body>
 </html> 

@@ -3,6 +3,7 @@
 
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../unicate_server/src/main/styles/navbar.css">
     <title>LogIn</title>
     <style>
         #header {
@@ -48,6 +49,15 @@
 </head>
 
 <body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="home.html" class="nav-link">Campfire</a>
+        </div>
+        <div class="navbar-right">
+            <!-- filled by navbar.js -->
+        </div>
+    </nav>
+
     <div id="header" class="container-fluid">
         <div class="row">
             <h1 class="col-12">Login</h1>
@@ -122,6 +132,8 @@
             return false;
         }
     </script>
+
+    <script src="navbar.js"></script>
 </body>
 
 </html>

@@ -4,6 +4,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="../unicate_server/src/main/styles/styles.css">
+    <link rel="stylesheet" href="../unicate_server/src/main/styles/navbar.css">
     <title>View Post</title>
     <style>
     .hero-banner {
@@ -188,10 +189,19 @@
         }
       });
 
+      // check if logged in, if so, show comment input box, if not, don't
       window.addEventListener("DOMContentLoaded", () => {
+        const isLoggedIn = localStorage.getItem("login") === "yes";
+        const commentForm = document.querySelector(".comment-form-container");
+
+        if (commentForm) {
+          commentForm.style.display = isLoggedIn ? "block" : "none";
+        }
+
+        // load activity details and comments regardless of logged-in status
         loadActivityDetails();
         loadComments();
-      });
+    });
 	</script>    
 </body>
 </html>
