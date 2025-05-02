@@ -1,13 +1,12 @@
-package csci201team25.unicate_server;
-
-
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-//import javax.json.*;
+import com.google.gson.*;
+import com.google.gson.stream.JsonReader;
+
 import java.io.IOException;
 import java.io.StringReader;
 import java.sql.Connection;
@@ -32,7 +31,7 @@ public class CalendarServlet extends HttpServlet {
 		Statement st = null;
 		ResultSet rs = null;
 		
-		// checking for an active session
+		// Checking for an active session
 		Boolean active_session = false;
 		HttpSession session = request.getSession(false);
 		int userID = 0;
@@ -42,11 +41,11 @@ public class CalendarServlet extends HttpServlet {
 			active_session = true;
 		}
 
-		// db info (name and login)
+		// Variable information
 		String overlap_event = "Spring Break";
 		String db = "unicate";
 		String username = "root";
-		String password = "root";		
+		String password = "W0nder4lyfe65131211*";		
 		String connection = "jdbc:mysql://localhost/" + db.trim() + "?user=" + username.trim() + "&password=" + password.trim();
 		
 		try {
@@ -55,84 +54,72 @@ public class CalendarServlet extends HttpServlet {
 			st = conn.createStatement();
 			
 			String query = "";
-			// sql query if the user is logged in 
-			// (getting universities from SQL with userID)
+			// SQL query if the user is logged in (getting universities from SQL with userID)
 			if (active_session) {
 				query = "SELECT u.UniversityName, u.CalendarDates " +
-	                    		"FROM UserUniversity uu " +
-	                    		"JOIN Universities u ON uu.uniID = u.uniID " +
-	                    		"WHERE uu.userID = " + userID;
+	                    "FROM UserUniversity uu " +
+	                    "JOIN Universities u ON uu.uniID = u.uniID " +
+	                    "WHERE uu.userID = " + userID;
 			}
-			// the query if the user isn't logged in 
-			// (getting list of all unis from URL in the form of uni IDs)
+			// SQL query if the user isn't logged in (getting universities from URL in the form of uni IDs)
 			else {
 				List<String> universityIDs = new ArrayList<>();
 				universityIDs.add(request.getParameter("uni1"));
 				universityIDs.add(request.getParameter("uni2"));
 				universityIDs.add(request.getParameter("uni3"));
-			    	String id_list = "";
-			    	boolean first = true;
-			    	for (int i = 0; i < universityIDs.size(); i++) {
-				    	String id = universityIDs.get(i).trim();
-				    	if (id.equals("0")) {
-				        	continue; 
-				        }
-				    	else if (first) {
-				        	id_list = id;
-				        	first = false;
-				        } 
-				        else {
-				        	id_list = id_list + "," + id;
-				    	}
+			    String id_list = "";
+			    boolean first = true;
+			    for (int i = 0; i < universityIDs.size(); i++) {
+			    	String id = universityIDs.get(i).trim();
+			    	if (id.equals("0")) {
+			        	continue; 
+			        }
+			    	else if (first) {
+			        	id_list = id;
+			        	first = false;
+			        } 
+			        else {
+			        	id_list = id_list + "," + id;
 			    	}
-				query = "SELECT UniversityName, CalendarDates FROM Universities WHERE uniID IN (" + id_list + ")";
+			    }
+			    query = "SELECT UniversityName, CalendarDates FROM Universities WHERE uniID IN (" + id_list + ")";
 			}
 			rs = st.executeQuery(query);
 			
-			// storing the break times in a map
+			// Storing the break times in a map
 			Map<String, String[]> breaks = new HashMap<>();
 			while (rs.next()) {
 				String uni = rs.getString("UniversityName");
-				String json_dates = rs.getString("CalendarDates");
+			    	String json_dates = rs.getString("CalendarDates");
 			    
-				// System.out.println("Uni CP: " + uni);
-				// System.out.println("Dates JSON CP: " + json_dates);
-
-				// note from himanshu: these few lines of code are screaming at me
-				// due to json stuff, and I need to add some HTML and CSS so i'm
-				// commenting it out for now.!
-				
-//			!	JsonReader reader = Json.createReader(new StringReader(json_dates));
-//				JsonArray array = reader.readArray();
-//			    
-//				// going through all of the events to find the specific event in a list of events
-//				for (int i = 0; i < array.size(); i++) {
-//				// https://stackoverflow.com/questions/7634518/getting-jsonobject-from-jsonarray
-//				    	JsonObject event = array.getJsonObject(i);
-//				    	if (overlap_event.equals(event.getString("event"))) {
-//						String start = event.getString("start_date");
-//						String end = event.getString("end_date");
-//						breaks.put(uni, new String[]{start, end});
-//						break;
-//				        }
-//				}
+			    	// System.out.println("Uni CP: " + uni);
+			    	// System.out.println("Dates JSON CP: " + json_dates);
+			    
+			    	JsonElement jsonElement = JsonParser.parseString(json_dates);
+			    	JsonArray array = jsonElement.getAsJsonArray();
+			    
+			    	// Going through all of the events to find the specific event in a list of events
+				for (int i = 0; i < array.size(); i++) {
+					JsonElement elem = array.get(i);
+				    	JsonObject event = elem.getAsJsonObject();
+			    		if (overlap_event.equals(event.get("event").getAsString())) {
+				            	String start = event.get("start_date").getAsString();
+				           	String end = event.get("end_date").getAsString();
+				            	breaks.put(uni, new String[]{start, end});
+				            	break;
+			        	}
+			    	}
 			}
-//			
-//			// sending break dates to frontend as JSON object
-//			JsonObjectBuilder json_builder = Json.createObjectBuilder();
-//			for (Map.Entry<String, String[]> entry : breaks.entrySet()) {
-//				String uni_name = entry.getKey();
-//				JsonArray dates_array = Json.createArrayBuilder().add(entry.getValue()[0]).add(entry.getValue()[1]).build();
-//				json_builder.add(uni_name, dates_array);
-//			} 
-//			// System.out.println("JSON Builder CP: " + json_builder.build().toString());
-//			
-//			response.setContentType("application/json");
-//			response.setCharacterEncoding("UTF-8");
-//			response.getWriter().write(json_builder.build().toString());
+
+			Gson gson = new GsonBuilder().create();
+			String json = gson.toJson(breaks);
+			
+			response.setContentType("application/json");
+			response.setCharacterEncoding("UTF-8");
+			response.getWriter().write(json);
 		} 
 		
-		// error catching 
+		// Catching errors 
 		catch (SQLException sqle) {
 			System.out.println("SQLException: " + sqle.getMessage());
 		} 
@@ -141,27 +128,27 @@ public class CalendarServlet extends HttpServlet {
 			System.out.println ("ClassNotFoundException: " + e.getMessage());
 		} 
 		
-		// closing objects in finally block
+		// Closing objects
 		// https://stackoverflow.com/questions/22671697/try-try-with-resources-and-connection-statement-and-resultset-closing
 		finally {
-			try {
-				if (conn != null) conn.close();
-		    	} catch (SQLException sqle) {
-		    		System.out.println ("SQLException: " + sqle.getMessage());		    
-		    	}
-			
-		    	try {
-				if (st != null) st.close();
-			} catch (SQLException sqle) {
-				System.out.println ("SQLException: " + sqle.getMessage());	
-			}
-			
-			try {
-				if (rs != null) rs.close();
-			} catch (SQLException sqle) {
-				System.out.println ("SQLException: " + sqle.getMessage());	
-			}
+		    try {
+		        if (conn != null) conn.close();
+		    } catch (SQLException sqle) {
+		    	System.out.println ("SQLException: " + sqle.getMessage());		    
+		    
+		    }
+		    
+		    try {
+		        if (st != null) st.close();
+		    } catch (SQLException sqle) {
+		    	System.out.println ("SQLException: " + sqle.getMessage());	
+		    }
+		    
+		    try {
+		        if (rs != null) rs.close();
+		    } catch (SQLException sqle) {
+		    	System.out.println ("SQLException: " + sqle.getMessage());	
+		    }
 		}	
 	} 
 }
-
