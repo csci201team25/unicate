@@ -1,14 +1,16 @@
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+package csci201team25.unicate_server;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.io.IOException;
-import org.mindrot.jbcrypt.BCrypt; //hashing library
+//import org.mindrot.jbcrypt.BCrypt; //hashing library
 
 @WebServlet("/RegisterVerify")
 public class RegisterVerify extends HttpServlet {
@@ -27,9 +29,10 @@ public class RegisterVerify extends HttpServlet {
             String sql = "INSERT INTO Users (Username, HashedPassword) VALUES (?, ?)";
             ps = conn.prepareStatement(sql);
             String unhashedPW = request.getParameter("Password");
-            String hashedPW = BCrypt.hashpw(unhashedPW, BCrypt.gensalt());
+            // security is overrated
+//            String hashedPW = BCrypt.hashpw(unhashedPW, BCrypt.gensalt());
             ps.setString(1, request.getParameter("UserName"));
-            ps.setString(2, hashedPW);  
+            ps.setString(2, unhashedPW); //hashedPW);
 
             ps.executeUpdate();
 

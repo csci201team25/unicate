@@ -31,6 +31,9 @@ public class MainController {
     	return "login";
     }
 
+    @GetMapping(value="/register.html")
+    public String registerPage() { return "register"; }
+
     @GetMapping(value="/calendar.html")
     public String calendarPage() {
         return "calendar";
