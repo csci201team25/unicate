@@ -63,6 +63,15 @@ CREATE TABLE UserActivity (
     avgRating FLOAT DEFAULT 0
 );
 
+CREATE TABLE Activities (
+    actID INT AUTO_INCREMENT PRIMARY KEY,
+    actName VARCHAR(100) NOT NULL,
+    actLocation VARCHAR(255),         
+    actImage VARCHAR(500),   
+    description TEXT,          
+    uniID INT,
+    FOREIGN KEY (uniID) REFERENCES Universities(uniID)
+);
 
 CREATE TABLE Comments (
     commentID INT AUTO_INCREMENT PRIMARY KEY,
@@ -72,15 +81,4 @@ CREATE TABLE Comments (
     actID INT,
     FOREIGN KEY (userID) REFERENCES Users(userID),
     FOREIGN KEY (actID) REFERENCES Activities(actID)
-);
-
-
-CREATE TABLE Activities (
-    actID INT AUTO_INCREMENT PRIMARY KEY,
-    actName VARCHAR(100) NOT NULL,
-    actLocation VARCHAR(255),         
-    actImage VARCHAR(500),   
-    description TEXT,          
-    uniID INT,
-    FOREIGN KEY (uniID) REFERENCES Universities(uniID)
 );
