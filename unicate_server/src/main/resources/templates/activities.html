@@ -11,6 +11,8 @@
       font-size: 18px;
       display: block;
       margin-bottom: 10px;
+      text-decoration: none;
+      color: white;
     }
     body {
       background-image: url("Background.png");
@@ -21,10 +23,6 @@
       height: 50px;
       margin-bottom: 10px;
       text-align: center;
-    }
-    .link_style {
-      text-decoration: none;
-      color: white;
     }
   </style>
 </head>
@@ -51,7 +49,6 @@
           const div1 = document.createElement("div");
           div1.classList.add("activityBox");
           const link = document.createElement("a");
-          div1.classList.add("link_style");
           link.href = `post.html?actId=${activity.actID}`;
           link.textContent = `${activity.actName} (${activity.university.universityName})`;
           link.className = "activity-link";
