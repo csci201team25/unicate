@@ -105,6 +105,14 @@
 		        // modifying html to display the event days
 		        const days = document.querySelectorAll(".day");
 		        for (const day of days) {
+				const curr_inn = day.innerHTML;
+				day.addEventListener('mouseover', function(event) {
+					day.innerHTML = "University Name";
+				}
+				div.addEventListener('mouseout', function() {
+      					day.innerHTML = curr_in;
+    				});
+				
 		                const date = day.getAttribute("data-date");
 		                const tally = date_counts.get(date) || 0;
 	
