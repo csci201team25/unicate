@@ -49,13 +49,6 @@
       margin-top: 10px;
     }
 
-    .navbar {
-      position: absolute;
-      top: 0;
-      width: 90%;
-      z-index: 3;
-      background: none;
-    }
     .post-page {
         padding-top: 0;
         padding-left: 0px;
@@ -180,13 +173,11 @@
           });
 
           if (res.ok) {
-            alert("Comment posted!");
             document.getElementById("comment").value = "";
             await loadComments(); // refresh the comments section
           } else {
             const errText = await res.text();
             console.error("Failed to post comment:", errText);
-            alert("Failed to post comment. Please try again.");
           }
         } catch (error) {
           console.error("Error posting comment:", error);
@@ -207,7 +198,9 @@
         loadActivityDetails();
         loadComments();
     });
-	</script>    
+	</script> 
+
+  <script src="navbar.js"></script>   
 </body>
 </html>
 
