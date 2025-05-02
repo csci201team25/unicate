@@ -71,7 +71,7 @@ CREATE TABLE Comments (
     bodyText TEXT NOT NULL,
     actID INT,
     FOREIGN KEY (userID) REFERENCES Users(userID),
-    FOREIGN KEY (actID) REFERENCES UserActivity(actID)
+    FOREIGN KEY (actID) REFERENCES Activities(actID)
 );
 
 

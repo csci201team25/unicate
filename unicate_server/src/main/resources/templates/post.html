@@ -158,10 +158,10 @@
       document.getElementById("comment-form").addEventListener("submit", async (e) => {
         e.preventDefault();
 
-        const comment = document.getElementById("comment").value;
-        const userId = 1; // TEMP: Replace with actual user ID later
+        const comment = document.getElementById("comment").value.trim();
+        const userId = parseInt(localStorage.getItem("userId"), 10);
 
-        if (!comment.trim()) {
+        if (!comment) {
           alert("Comment cannot be empty.");
           return;
         }
@@ -169,7 +169,9 @@
         try {
           const res = await fetch("comment-servlet", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+              "Content-Type": "application/json"
+            },
             body: JSON.stringify({
               text: comment,
               userId: userId,
@@ -180,13 +182,15 @@
           if (res.ok) {
             alert("Comment posted!");
             document.getElementById("comment").value = "";
-            await loadComments();
+            await loadComments(); // refresh the comments section
           } else {
-            alert("Failed to post comment.");
+            const errText = await res.text();
+            console.error("Failed to post comment:", errText);
+            alert("Failed to post comment. Please try again.");
           }
         } catch (error) {
           console.error("Error posting comment:", error);
-          alert("Server error occurred.");
+          alert("A server error occurred. Please try again later.");
         }
       });
 
