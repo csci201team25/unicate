@@ -13,35 +13,38 @@ public class ScheduleComparer {
         for (int i = 1; i < universities.size(); i++) {
             List<DateRange> newMatchingRanges = new ArrayList<>();
             University nextUniversity = universities.get(i);
-            // Compare every DateRange of the current university to the existing overlaps
+            // compare every DateRange of the current university to the existing overlaps
             for (DateRange newRange : nextUniversity.getDateRanges()) {
                 for (DateRange curRange : currentMatchingRanges) {
                     Optional<DateRange> possibleOverlap = rangeOverlap(curRange, newRange);
                     possibleOverlap.ifPresent(newMatchingRanges::add);
                 }
             }
-            // Early end case
+            // early end case
             if (newMatchingRanges.isEmpty())
                 return new ArrayList<>();
-            // Normal case (there are overlaps)
+            // normal case (there are overlaps)
             currentMatchingRanges = newMatchingRanges;
         }
         return currentMatchingRanges;
     }
 
     private static Optional<DateRange> rangeOverlap(DateRange a, DateRange b) {
-        // Get maximum of start dates
+        // get max of start dates
         LocalDate overlapStart = a.startDate.isAfter(b.startDate) ? a.startDate : b.startDate;
-        // Get minimum of end dates
+        // get min of end dates
         LocalDate overlapEnd = a.endDate.isBefore(b.endDate) ? a.endDate : b.endDate;
 
-        // Valid overlap
+        // if there is a valid overlap
         if (overlapStart.isBefore(overlapEnd) || overlapStart.isEqual(overlapEnd)) {
             return Optional.of(new DateRange(overlapStart, overlapEnd));
         }
-        // Invalid overlap
+        // invalid overlap
         else {
             return Optional.empty();
         }
     }
+    
+    
+    
 }
