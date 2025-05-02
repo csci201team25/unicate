@@ -1,12 +1,10 @@
-package csci201team25.unicate_server;
-
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-import jakarta.json.*;
+import javax.json.*;
 import java.io.IOException;
 import java.io.StringReader;
 import java.sql.Connection;
@@ -14,7 +12,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @WebServlet("/CalendarServlet")
@@ -29,12 +29,12 @@ public class CalendarServlet extends HttpServlet {
 		Statement st = null;
 		ResultSet rs = null;
 		
+		// Checking for an active session
 		Boolean active_session = false;
 		HttpSession session = request.getSession(false);
 		int userID = 0;
 		if (session != null) {
 			// https://stackoverflow.com/questions/6031278/session-attribute-access-and-converting-to-int
-			// unsure if we needed to cite the stackoverflow thread
 			userID = (Integer) session.getAttribute("userID");
 			active_session = true;
 		}
@@ -52,54 +52,57 @@ public class CalendarServlet extends HttpServlet {
 			st = conn.createStatement();
 			
 			String query = "";
-			// sql query if the user is logged in (getting unis from SQL with userID)
+			// SQL query if the user is logged in (getting universities from SQL with userID)
 			if (active_session) {
 				query = "SELECT u.UniversityName, u.CalendarDates " +
-	                    "FROM UserUniversity uu " +
-	                    "JOIN Universities u ON uu.uniID = u.uniID " +
-	                    "WHERE uu.userID = " + userID;
+	                    		"FROM UserUniversity uu " +
+	                    		"JOIN Universities u ON uu.uniID = u.uniID " +
+	                    		"WHERE uu.userID = " + userID;
 			}
-			// sql query if the user isn't logged in (getting all unis from URL in the form of uni IDs)
+			// SQL query if the user isn't logged in (getting universities from URL in the form of uni IDs)
 			else {
-			    String[] universityIDs = request.getParameter("universities").split(",");
-			    String id_list = "";
-			    for (int i = 0; i < universityIDs.length; i++) {
-			        String id = universityIDs[i].trim();
-			        id_list = id_list + id;
-			        if (i < universityIDs.length - 1) {
-			            id_list = id_list + ",";
-			        }
-			    }
-			    query = "SELECT UniversityName, CalendarDates FROM Universities WHERE uniID IN (" + id_list + ")";
+				List<String> universityIDs = new ArrayList<>();
+				universityIDs.add(request.getParameter("uni1"));
+				universityIDs.add(request.getParameter("uni2"));
+				universityIDs.add(request.getParameter("uni3"));
+			    	String id_list = "";
+			    	for (int i = 0; i < universityIDs.size(); i++) {
+			        	String id = universityIDs.get(i);
+			        	id_list = id_list + id;
+			        	if (i < universityIDs.size() - 1) {
+			            		id_list = id_list + ",";
+			        	}
+			    	}
+				query = "SELECT UniversityName, CalendarDates FROM Universities WHERE uniID IN (" + id_list + ")";
 			}
 			rs = st.executeQuery(query);
 			
-			// break times are stored in a map
+			// Storing the break times in a map
 			Map<String, String[]> breaks = new HashMap<>();
 			while (rs.next()) {
-			    String uni = rs.getString("UniversityName");
-			    String json_dates = rs.getString("CalendarDates");
+				String uni = rs.getString("UniversityName");
+				String json_dates = rs.getString("CalendarDates");
 			    
-			    // System.out.println("Uni CP: " + uni);
-			    // System.out.println("Dates JSON CP: " + json_dates);
+				// System.out.println("Uni CP: " + uni);
+				// System.out.println("Dates JSON CP: " + json_dates);
 
-			    JsonReader reader = Json.createReader(new StringReader(json_dates));
-			    JsonArray array = reader.readArray();
+				JsonReader reader = Json.createReader(new StringReader(json_dates));
+				JsonArray array = reader.readArray();
 			    
-			    // Going through all of the events to find the specific event in a list of events
-			    for (int i = 0; i < array.size(); i++) {
-			    	// https://stackoverflow.com/questions/7634518/getting-jsonobject-from-jsonarray
-			    	JsonObject event = array.getJsonObject(i);
-			    	if (overlap_event.equals(event.getString("event"))) {
-			            String start = event.getString("start_date");
-			            String end = event.getString("end_date");
-			            breaks.put(uni, new String[]{start, end});
-			            break;
-			        }
-			    }
+				// Going through all of the events to find the specific event in a list of events
+				for (int i = 0; i < array.size(); i++) {
+				// https://stackoverflow.com/questions/7634518/getting-jsonobject-from-jsonarray
+				    	JsonObject event = array.getJsonObject(i);
+				    	if (overlap_event.equals(event.getString("event"))) {
+						String start = event.getString("start_date");
+						String end = event.getString("end_date");
+						breaks.put(uni, new String[]{start, end});
+						break;
+				        }
+				}
 			}
 			
-			// sending break dates to frontend as JSON object
+			// Sending break dates to frontend as JSON object
 			JsonObjectBuilder json_builder = Json.createObjectBuilder();
 			for (Map.Entry<String, String[]> entry : breaks.entrySet()) {
 				String uni_name = entry.getKey();
@@ -111,10 +114,9 @@ public class CalendarServlet extends HttpServlet {
 			response.setContentType("application/json");
 			response.setCharacterEncoding("UTF-8");
 			response.getWriter().write(json_builder.build().toString());
-
 		} 
 		
-		// catch blocks
+		// Catching errors 
 		catch (SQLException sqle) {
 			System.out.println("SQLException: " + sqle.getMessage());
 		} 
@@ -123,28 +125,27 @@ public class CalendarServlet extends HttpServlet {
 			System.out.println ("ClassNotFoundException: " + e.getMessage());
 		} 
 		
-		// closing objects
+		// Closing objects
 		// https://stackoverflow.com/questions/22671697/try-try-with-resources-and-connection-statement-and-resultset-closing
-		// another citation
 		finally {
-		    try {
-		        if (conn != null) conn.close();
-		    } catch (SQLException sqle) {
-		    	System.out.println ("SQLException: " + sqle.getMessage());		    
-		    
-		    }
-		    
-		    try {
-		        if (st != null) st.close();
-		    } catch (SQLException sqle) {
-		    	System.out.println ("SQLException: " + sqle.getMessage());	
-		    }
-		    
-		    try {
-		        if (rs != null) rs.close();
-		    } catch (SQLException sqle) {
-		    	System.out.println ("SQLException: " + sqle.getMessage());	
-		    }
+			try {
+				if (conn != null) conn.close();
+		    	} catch (SQLException sqle) {
+		    		System.out.println ("SQLException: " + sqle.getMessage());		    
+		    	}
+			
+		    	try {
+				if (st != null) st.close();
+			} catch (SQLException sqle) {
+				System.out.println ("SQLException: " + sqle.getMessage());	
+			}
+			
+			try {
+				if (rs != null) rs.close();
+			} catch (SQLException sqle) {
+				System.out.println ("SQLException: " + sqle.getMessage());	
+			}
 		}	
 	} 
 }
+
