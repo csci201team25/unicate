@@ -17,4 +17,14 @@ public class ServletConfiguration {
         return new ServletRegistrationBean<>(new CalendarServlet(), "/CalendarServlet");
     }
 
+    @Bean
+    public ServletRegistrationBean<LoginVerify> loginVerifyServletRegistrationBean() {
+        return new ServletRegistrationBean<>(new LoginVerify(), "/LoginVerify");
+    }
+
+    @Bean
+    public ServletRegistrationBean<RegisterVerify> registerVerifyServletRegistrationBean() {
+        return new ServletRegistrationBean<>(new RegisterVerify(), "/RegisterVerify");
+    }
+
 }
