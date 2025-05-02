@@ -71,12 +71,19 @@ public class CalendarServlet extends HttpServlet {
 				universityIDs.add(request.getParameter("uni2"));
 				universityIDs.add(request.getParameter("uni3"));
 			    	String id_list = "";
+			    	boolean first = true;
 			    	for (int i = 0; i < universityIDs.size(); i++) {
-			        	String id = universityIDs.get(i);
-			        	id_list = id_list + id;
-			        	if (i < universityIDs.size() - 1) {
-			            		id_list = id_list + ",";
-			        	}
+				    	String id = universityIDs.get(i).trim();
+				    	if (id.equals("0")) {
+				        	continue; 
+				        }
+				    	else if (first) {
+				        	id_list = id;
+				        	first = false;
+				        } 
+				        else {
+				        	id_list = id_list + "," + id;
+				    	}
 			    	}
 				query = "SELECT UniversityName, CalendarDates FROM Universities WHERE uniID IN (" + id_list + ")";
 			}
