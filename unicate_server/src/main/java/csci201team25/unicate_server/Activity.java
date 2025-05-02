@@ -3,8 +3,8 @@ package csci201team25.unicate_server;
 import jakarta.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-// representation of the universities table in the db 
-// each instance of this class corresponds to the entries 
+/* Representation of the Universities Table in the DB */
+/* Each instance of this class corresponds to the entries */
 @Entity
 @Table(name="activities")
 public class Activity {
@@ -48,9 +48,16 @@ public class Activity {
 	
 	@ManyToOne
 	@JoinColumn(name = "uniID")
-	@JsonIgnoreProperties("activities") 
-	// ignoreproperties is to prevent circular serialization
+	@JsonIgnoreProperties("activities")
 	private University university;
+
+	public University getUniversity() {
+		return university;
+	}
+	
+	public University setUniversity() {
+		return university;
+	}
 
 	@Override
 	public String toString() {
