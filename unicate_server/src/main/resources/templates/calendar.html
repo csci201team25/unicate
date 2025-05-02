@@ -79,53 +79,53 @@
               </div>              
         </div>
     </div>
-    <script>
-    	// this function accepts a start (s) and end (e) and returns a range of days between them (inclusive)
-    	// https://stackoverflow.com/questions/4413590/javascript-get-array-of-dates-between-2-dates
-	    const get_days_array = function(s,e) {const a=[];for(const d=new Date(s);d<=new Date(e);d.setDate(d.getDate()+1)){ a.push(d.toISOString().split('T')[0]);}return a;};
+<script>
+	// this function accepts a start (s) and end (e) and returns a range of days between them (inclusive)
+	// https://stackoverflow.com/questions/4413590/javascript-get-array-of-dates-between-2-dates
+	const get_days_array = function(s,e) {const a=[];for(const d=new Date(s);d<=new Date(e);d.setDate(d.getDate()+1)){ a.push(d.toISOString().split('T')[0]);}return a;};
 
     	// fetching from backend CalendarServlet
-	    fetch('/unicate_test/CalendarServlet')
-	        .then(response => response.json())
+	fetch('/unicate_test/CalendarServlet')
+		.then(response => response.json())
 	        .then(data => {
 	        	// tallying the days that are in Spring Break
 	        	const date_counts = new Map();
-	            var num_universities = Object.keys(data).length;
+	            	var num_universities = Object.keys(data).length;
 	            
-	            for (const key in data) {
-	            	const start = data[key][0];
-	            	const end = data[key][1];
-	            	const range = get_days_array(start, end);
-	                
-	            	for (const date of range) {
-	                    date_counts.set(date, (date_counts.get(date) || 0) + 1);
-	                }
-	            }
+	            	for (const key in data) {
+		            	const start = data[key][0];
+		            	const end = data[key][1];
+		            	const range = get_days_array(start, end);
+		                
+		            	for (const date of range) {
+		                	date_counts.set(date, (date_counts.get(date) || 0) + 1);
+		                }
+	            	}
 	            
-	            // modifying html to display the event days
-	            const days = document.querySelectorAll(".day");
-	            for (const day of days) {
-	                const date = day.getAttribute("data-date");
-	                const tally = date_counts.get(date) || 0;
-
-	                // not a break day
-	                if (tally == 0) continue;
-	             	// full overlap
-	                else if (tally == num_universities) {
-	                	day.classList.add("overlap-day");
-	                }
-	                // partial overlap
-	                else if (tally > 0) {
-	                	day.classList.add("semi-overlap-day");
-	                }
+		        // modifying html to display the event days
+		        const days = document.querySelectorAll(".day");
+		        for (const day of days) {
+		                const date = day.getAttribute("data-date");
+		                const tally = date_counts.get(date) || 0;
+	
+		                // not a break day
+		                if (tally == 0) continue;
+		             	// full overlap
+		                else if (tally == num_universities) {
+		                	day.classList.add("overlap-day");
+		                }
+		                // partial overlap
+		                else if (tally > 0) {
+		                	day.classList.add("semi-overlap-day");
+		                }
 	                
-	                // adding tally of uni overlap
-	                // https://stackoverflow.com/questions/26542652/how-to-add-text-into-span-after-document-createelementspan
-	                const badge = document.createElement("span");
-	                badge.classList.add("day-count");
-	                badge.textContent = `${tally}/${num_universities}`;
-	                day.appendChild(badge);
-	           	}
+		                // adding tally of uni overlap
+		                // https://stackoverflow.com/questions/26542652/how-to-add-text-into-span-after-document-createelementspan
+		                const badge = document.createElement("span");
+		                badge.classList.add("day-count");
+		                badge.textContent = `${tally}/${num_universities}`;
+		                day.appendChild(badge);
+	        	}
 	    	})
 		.catch(error => console.error('Error:', error));
 </script>
