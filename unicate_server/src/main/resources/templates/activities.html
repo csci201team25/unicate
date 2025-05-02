@@ -20,6 +20,8 @@
       background-color: black;
       height: 50px;
       margin-bottom: 10px;
+    }
+    .link_style {
       text-decoration: none;
       color: white;
     }
@@ -48,6 +50,7 @@
           const div1 = document.createElement("div");
           div1.classList.add("activityBox");
           const link = document.createElement("a");
+          div1.classList.add("link_style");
           link.href = `post.html?actId=${activity.actID}`;
           link.textContent = `${activity.actName} (${activity.university.universityName})`;
           link.className = "activity-link";
