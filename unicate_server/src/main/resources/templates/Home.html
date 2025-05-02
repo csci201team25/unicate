@@ -4,6 +4,7 @@
   <title>Home</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="/navbar.css">
+  <link rel="stylesheet" href="/styles.css">
   <style>
     body {
       background-image: url("Background.png");
@@ -65,17 +66,26 @@
   <div id="header">
     <h1>Welcome to Campfire</h1>
   </div>
+  <div id="info">
+    <p>
+        Welcome! This is a web application where students can input a list of school names to output the calendars for those schools. The program will also compare the available vacation times on the calendars to output a list of dates during which school vacation days overlap. The program will also check the surrounding locations for each school to find potential meeting locations. Users are required to login to save the output information and make posts about their vacation locations. 
+    </p>
+           <!-- <a href="AddSchool.html">Add Universities</a>. -->
+        <!-- i don't think we need the above link? bc of 'spark something' -->
+  </div>
 
   <div id="content">
-    <form action="AddSchool.html">
+    <a href="AddSchool.html" class="action-button maroon">Spark Something</a>
+    <!-- <form action="AddSchool.html">
       <button id="sparking" type="submit" class="btn btn-primary">Spark Something</button>
-    </form>
+    </form> -->
 
     <hr />
+    <a href="activities.html" class="action-button grey">Explore Activities</a>
 
-    <form action="activities.html">
+    <!-- <form action="activities.html">
       <button type="submit" class="btn btn-secondary">Explore Activities</button>
-    </form>
+    </form> -->
   </div>
 
   <script src="navbar.js"></script>

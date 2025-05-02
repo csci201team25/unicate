@@ -1,10 +1,13 @@
+package csci201team25.unicate_server;
+
+
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-import javax.json.*;
+//import javax.json.*;
 import java.io.IOException;
 import java.io.StringReader;
 import java.sql.Connection;
@@ -29,7 +32,7 @@ public class CalendarServlet extends HttpServlet {
 		Statement st = null;
 		ResultSet rs = null;
 		
-		// Checking for an active session
+		// checking for an active session
 		Boolean active_session = false;
 		HttpSession session = request.getSession(false);
 		int userID = 0;
@@ -39,7 +42,7 @@ public class CalendarServlet extends HttpServlet {
 			active_session = true;
 		}
 
-		// Variable information
+		// db info (name and login)
 		String overlap_event = "Spring Break";
 		String db = "unicate";
 		String username = "root";
@@ -52,14 +55,16 @@ public class CalendarServlet extends HttpServlet {
 			st = conn.createStatement();
 			
 			String query = "";
-			// SQL query if the user is logged in (getting universities from SQL with userID)
+			// sql query if the user is logged in 
+			// (getting universities from SQL with userID)
 			if (active_session) {
 				query = "SELECT u.UniversityName, u.CalendarDates " +
 	                    		"FROM UserUniversity uu " +
 	                    		"JOIN Universities u ON uu.uniID = u.uniID " +
 	                    		"WHERE uu.userID = " + userID;
 			}
-			// SQL query if the user isn't logged in (getting universities from URL in the form of uni IDs)
+			// the query if the user isn't logged in 
+			// (getting list of all unis from URL in the form of uni IDs)
 			else {
 				List<String> universityIDs = new ArrayList<>();
 				universityIDs.add(request.getParameter("uni1"));
@@ -77,7 +82,7 @@ public class CalendarServlet extends HttpServlet {
 			}
 			rs = st.executeQuery(query);
 			
-			// Storing the break times in a map
+			// storing the break times in a map
 			Map<String, String[]> breaks = new HashMap<>();
 			while (rs.next()) {
 				String uni = rs.getString("UniversityName");
@@ -86,37 +91,41 @@ public class CalendarServlet extends HttpServlet {
 				// System.out.println("Uni CP: " + uni);
 				// System.out.println("Dates JSON CP: " + json_dates);
 
-				JsonReader reader = Json.createReader(new StringReader(json_dates));
-				JsonArray array = reader.readArray();
-			    
-				// Going through all of the events to find the specific event in a list of events
-				for (int i = 0; i < array.size(); i++) {
-				// https://stackoverflow.com/questions/7634518/getting-jsonobject-from-jsonarray
-				    	JsonObject event = array.getJsonObject(i);
-				    	if (overlap_event.equals(event.getString("event"))) {
-						String start = event.getString("start_date");
-						String end = event.getString("end_date");
-						breaks.put(uni, new String[]{start, end});
-						break;
-				        }
-				}
+				// note from himanshu: these few lines of code are screaming at me
+				// due to json stuff, and I need to add some HTML and CSS so i'm
+				// commenting it out for now.!
+				
+//			!	JsonReader reader = Json.createReader(new StringReader(json_dates));
+//				JsonArray array = reader.readArray();
+//			    
+//				// going through all of the events to find the specific event in a list of events
+//				for (int i = 0; i < array.size(); i++) {
+//				// https://stackoverflow.com/questions/7634518/getting-jsonobject-from-jsonarray
+//				    	JsonObject event = array.getJsonObject(i);
+//				    	if (overlap_event.equals(event.getString("event"))) {
+//						String start = event.getString("start_date");
+//						String end = event.getString("end_date");
+//						breaks.put(uni, new String[]{start, end});
+//						break;
+//				        }
+//				}
 			}
-			
-			// Sending break dates to frontend as JSON object
-			JsonObjectBuilder json_builder = Json.createObjectBuilder();
-			for (Map.Entry<String, String[]> entry : breaks.entrySet()) {
-				String uni_name = entry.getKey();
-				JsonArray dates_array = Json.createArrayBuilder().add(entry.getValue()[0]).add(entry.getValue()[1]).build();
-				json_builder.add(uni_name, dates_array);
-			} 
-			// System.out.println("JSON Builder CP: " + json_builder.build().toString());
-			
-			response.setContentType("application/json");
-			response.setCharacterEncoding("UTF-8");
-			response.getWriter().write(json_builder.build().toString());
+//			
+//			// sending break dates to frontend as JSON object
+//			JsonObjectBuilder json_builder = Json.createObjectBuilder();
+//			for (Map.Entry<String, String[]> entry : breaks.entrySet()) {
+//				String uni_name = entry.getKey();
+//				JsonArray dates_array = Json.createArrayBuilder().add(entry.getValue()[0]).add(entry.getValue()[1]).build();
+//				json_builder.add(uni_name, dates_array);
+//			} 
+//			// System.out.println("JSON Builder CP: " + json_builder.build().toString());
+//			
+//			response.setContentType("application/json");
+//			response.setCharacterEncoding("UTF-8");
+//			response.getWriter().write(json_builder.build().toString());
 		} 
 		
-		// Catching errors 
+		// error catching 
 		catch (SQLException sqle) {
 			System.out.println("SQLException: " + sqle.getMessage());
 		} 
@@ -125,7 +134,7 @@ public class CalendarServlet extends HttpServlet {
 			System.out.println ("ClassNotFoundException: " + e.getMessage());
 		} 
 		
-		// Closing objects
+		// closing objects in finally block
 		// https://stackoverflow.com/questions/22671697/try-try-with-resources-and-connection-statement-and-resultset-closing
 		finally {
 			try {

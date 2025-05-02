@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api")
 @CrossOrigin
 public class ActivityController {
+	// basically an API that lets you get the activities and the universities
 
     @Autowired
     private ActivityRepository activityRepository;

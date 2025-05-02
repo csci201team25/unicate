@@ -23,9 +23,11 @@ public class LoginVerify extends HttpServlet {
 		Statement st = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		// relatively basic login verification
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mysql://localhost/unicate?user=root&password=root");
+			// inserting the details by hard coding again; subject to change into variables
 			st = conn.createStatement();
 			ps = conn.prepareStatement("SELECT * FROM users WHERE Username = \'" + request.getParameter("Username") + "\' AND HashedPassword = \'" + request.getParameter("Password") + "\';");
 			rs = ps.executeQuery();
@@ -33,12 +35,14 @@ public class LoginVerify extends HttpServlet {
 			if (rs.next()) {
 				isName = true;
 			}
+		// catch blocks for errors
 		} catch (SQLException s) {
 			System.out.println ("Exception: " + s.getMessage());
 		} catch (ClassNotFoundException c) {
 			System.out.println ("Exception: " + c.getMessage());
 		} finally {
 			try {
+				// closing in the finally block
 				if (rs != null) {
 					rs.close();
 				}
@@ -55,6 +59,8 @@ public class LoginVerify extends HttpServlet {
 				System.out.println("sqle: " + sqle.getMessage());
 			}
 		}
+		// just writing the output directly into an error in the browser
+		// Note; should change to in-field error messages
 		String output = "incorrect";
 		if (isName) {
 			output = "verified";

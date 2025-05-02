@@ -10,7 +10,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.io.IOException;
-//import org.mindrot.jbcrypt.BCrypt; //hashing library
+//import org.mindrot.jbcrypt.BCrypt; // hashing library
 
 @WebServlet("/RegisterVerify")
 public class RegisterVerify extends HttpServlet {
@@ -25,26 +25,28 @@ public class RegisterVerify extends HttpServlet {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             conn = DriverManager.getConnection("jdbc:mysql://localhost/unicate?user=root&password=root");
-
+            // hardcoding the db details again; subject to change again
             String sql = "INSERT INTO Users (Username, HashedPassword) VALUES (?, ?)";
             ps = conn.prepareStatement(sql);
             String unhashedPW = request.getParameter("Password");
             // security is overrated
-//            String hashedPW = BCrypt.hashpw(unhashedPW, BCrypt.gensalt());
+//          String hashedPW = BCrypt.hashpw(unhashedPW, BCrypt.gensalt());
             ps.setString(1, request.getParameter("UserName"));
             ps.setString(2, unhashedPW); //hashedPW);
 
             ps.executeUpdate();
-
+            // relatively simple registration verification
             response.sendRedirect("AddSchool.html");
             return;
 
         } 
+        // error catching
         catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
             response.sendRedirect("Register.html?error=registration_failed");
         }
          finally {
+        	 // closing
             try {
                 if (ps != null) {
                     ps.close();

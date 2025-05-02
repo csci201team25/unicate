@@ -1,12 +1,13 @@
 window.addEventListener("DOMContentLoaded", () => {
+    // dyamic navbar
     const nav = document.querySelector(".navbar-right");
     if (!nav) return;
   
     nav.innerHTML = "";
   
     const calendarLink = document.createElement("a");
-    calendarLink.href = "Calendar.html";
-    calendarLink.className = "nav-link";
+    calendarLink.href = "calendar.html";
+    calendarLink.className = "nav-link outlined";
     calendarLink.textContent = "Calendar";
     nav.appendChild(calendarLink);
   

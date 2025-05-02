@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+// possibly unnecessary?
+
 public class ScheduleComparer {
     public static List<DateRange> compareUniversitySchedules(List<University> universities) {
         if (universities.isEmpty())

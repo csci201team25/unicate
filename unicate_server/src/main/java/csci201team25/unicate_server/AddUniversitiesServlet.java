@@ -1,9 +1,12 @@
+package csci201team25.unicate_server;
+
+
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-import javax.json.*;
+//import javax.json.*;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -23,7 +26,7 @@ public class AddUniversitiesServlet extends HttpServlet {
 		Statement st = null;
 		ResultSet rs = null;
 		
-		// Variable information
+		// db info (name and login)
 		String db = "unicate";
 		String username = "root";
 		String password = "root";		
@@ -35,23 +38,26 @@ public class AddUniversitiesServlet extends HttpServlet {
 			st = conn.createStatement();
 			rs = st.executeQuery("SELECT uniID, UniversityName FROM Universities");
 			
-			// Sending uni ID and name to frontend as JSON object
-			JsonObjectBuilder json_builder = Json.createObjectBuilder();
-			String id = "";
-			String uni_name = "";
-			while (rs.next()) {
-				id = rs.getString("uniID");
-				uni_name = rs.getString("UniversityName");
-				json_builder.add(id, uni_name);
-			} 
-			// System.out.println("JSON Builder CP: " + json_builder.build().toString());
+			// sending uni ID and name to frontend as JSON object
 			
-			response.setContentType("application/json");
-			response.setCharacterEncoding("UTF-8");
-			response.getWriter().write(json_builder.build().toString());
+			// note from himanshu: same json problems with this too
+			
+//		!	JsonObjectBuilder json_builder = Json.createObjectBuilder();
+//			String id = "";
+//			String uni_name = "";
+//			while (rs.next()) {
+//				id = rs.getString("uniID");
+//				uni_name = rs.getString("UniversityName");
+//				json_builder.add(id, uni_name);
+//			} 
+			// System.out.println("JSON Builder CP: " + json_builder.build().toString());
+//			
+//			response.setContentType("application/json");
+//			response.setCharacterEncoding("UTF-8");
+//			response.getWriter().write(json_builder.build().toString());
 		} 
 		
-		// Catching errors 
+		// catching errors 
 		catch (SQLException sqle) {
 			System.out.println("SQLException: " + sqle.getMessage());
 		} 

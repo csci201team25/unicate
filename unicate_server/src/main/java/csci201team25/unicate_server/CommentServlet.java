@@ -27,11 +27,13 @@ public class CommentServlet extends HttpServlet {
         while ((line = reader.readLine()) != null) {
             sb.append(line);
         }
+        // reading in the comment
 
         JsonObject json = new Gson().fromJson(sb.toString(), JsonObject.class);
         String commentText = json.get("text").getAsString();
         int userId = json.get("userId").getAsInt();
         int actId = json.get("actId").getAsInt();
+        // and getting all the necessary details for the database
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -39,6 +41,8 @@ public class CommentServlet extends HttpServlet {
             try (Connection conn = DriverManager.getConnection(
                     "jdbc:mysql://localhost:3306/unicate?serverTimezone=UTC",
                     "root", "root")) {
+            	// decided to automatically just insert the login details bc they
+            	// aren't changing; subject to change into variables possibly
 
                 try (PreparedStatement stmt = conn.prepareStatement(
                         "INSERT INTO Comments (userID, bodyText, actID) VALUES (?, ?, ?)")) {
@@ -47,6 +51,7 @@ public class CommentServlet extends HttpServlet {
                     stmt.setString(2, commentText);
                     stmt.setInt(3, actId);
                     stmt.executeUpdate();
+                    // inserting the comment text into the database
 
                     resp.setStatus(HttpServletResponse.SC_OK);
                 }
@@ -107,6 +112,7 @@ public class CommentServlet extends HttpServlet {
                     }
                 }
             }
+            // error catching
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

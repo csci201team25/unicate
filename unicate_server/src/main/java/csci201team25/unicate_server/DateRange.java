@@ -3,6 +3,7 @@ package csci201team25.unicate_server;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+// daterange class for internal use 
 public class DateRange {
 	LocalDate startDate;
 	LocalDate endDate;

@@ -15,6 +15,7 @@ public class UnicateServerApplication {
     @Bean
     CommandLineRunner printUniversityNames(UniversityRepository uniRepo, ActivityRepository actRepo) {
         return args -> {
+        	// prints the db on startup for error checking
             System.out.println("== University table contents on Startup ==");
             uniRepo.findAll().forEach(System.out::println);
             System.out.println("== Find university by name test USC ==");

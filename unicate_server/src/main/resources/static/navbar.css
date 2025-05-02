@@ -42,3 +42,9 @@
 .nav-link.outlined {
     border: 1px solid white;
 }
+
+.nav-link.outlined:hover{
+    color: black;
+    background-color: white;
+    text-decoration: none; 
+}

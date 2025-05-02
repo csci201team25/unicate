@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
-/*** Determines what webpage is returned when a URL on the server is accessed ***/
+// determines what webpage is returned when a URL on the server is accessed
 @Controller
 public class MainController {
     @RequestMapping(value="/hello-world", method=RequestMethod.GET)
