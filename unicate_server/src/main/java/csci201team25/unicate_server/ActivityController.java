@@ -12,6 +12,8 @@ public class ActivityController {
 
     @Autowired
     private ActivityRepository activityRepository;
+    @Autowired
+    private UniversityRepository universityRepository;
 
     @GetMapping("/activities")
     public List<Activity> getAllActivities() {
@@ -21,5 +23,10 @@ public class ActivityController {
     @GetMapping("/activities/by-university")
     public List<Activity> getActivitiesByUniversity(@RequestParam String universityName) {
         return activityRepository.findByUniversity_UniversityName(universityName);
+    }
+    
+    @GetMapping("/universities/")
+    public List<University> getAllUniversities() {
+        return universityRepository.findAll();
     }
 }
