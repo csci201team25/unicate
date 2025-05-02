@@ -45,7 +45,7 @@ public class CalendarServlet extends HttpServlet {
 		String overlap_event = "Spring Break";
 		String db = "unicate";
 		String username = "root";
-		String password = "W0nder4lyfe65131211*";		
+		String password = "root";		
 		String connection = "jdbc:mysql://localhost/" + db.trim() + "?user=" + username.trim() + "&password=" + password.trim();
 		
 		try {
@@ -67,6 +67,8 @@ public class CalendarServlet extends HttpServlet {
 				universityIDs.add(request.getParameter("uni1"));
 				universityIDs.add(request.getParameter("uni2"));
 				universityIDs.add(request.getParameter("uni3"));
+				universityIDs.add(request.getParameter("uni4"));
+				universityIDs.add(request.getParameter("uni5"));
 			    String id_list = "";
 			    boolean first = true;
 			    for (int i = 0; i < universityIDs.size(); i++) {
