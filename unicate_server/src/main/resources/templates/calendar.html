@@ -85,8 +85,8 @@
 	const get_days_array = function(s,e) {const a=[];for(const d=new Date(s);d<=new Date(e);d.setDate(d.getDate()+1)){ a.push(d.toISOString().split('T')[0]);}return a;};
 
     	// fetching from backend CalendarServlet
-	fetch('/unicate_test/CalendarServlet')
-		.then(response => response.json())
+	fetch('/CalendarServlet')
+		.then(response => response.json() )
 	        .then(data => {
 	        	// tallying the days that are in Spring Break
 	        	const date_counts = new Map();

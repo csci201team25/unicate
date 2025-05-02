@@ -1,3 +1,5 @@
+package csci201team25.unicate_server;
+
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,7 +34,7 @@ public class CalendarServlet extends HttpServlet {
 		ResultSet rs = null;
 		
 		// Checking for an active session
-		Boolean active_session = false;
+		boolean active_session = false;
 		HttpSession session = request.getSession(false);
 		int userID = 0;
 		if (session != null) {
@@ -45,7 +47,7 @@ public class CalendarServlet extends HttpServlet {
 		String overlap_event = "Spring Break";
 		String db = "unicate";
 		String username = "root";
-		String password = "root";		
+		String password = "root";
 		String connection = "jdbc:mysql://localhost/" + db.trim() + "?user=" + username.trim() + "&password=" + password.trim();
 		
 		try {

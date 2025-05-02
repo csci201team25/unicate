@@ -29,4 +29,9 @@ public class ServletConfiguration {
         return new ServletRegistrationBean<>(new RegisterVerify(), "/RegisterVerify");
     }
 
+    @Bean
+    public ServletRegistrationBean<AddUniversitiesServlet> addUniversitiesServletServletRegistrationBean() {
+        return new ServletRegistrationBean<>(new AddUniversitiesServlet(), "/AddUniversitiesServlet");
+    }
+
 }
