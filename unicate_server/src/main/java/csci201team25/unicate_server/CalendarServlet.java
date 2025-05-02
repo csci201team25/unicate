@@ -29,12 +29,12 @@ public class CalendarServlet extends HttpServlet {
 		Statement st = null;
 		ResultSet rs = null;
 		
-		// Checking for an active session
 		Boolean active_session = false;
 		HttpSession session = request.getSession(false);
 		int userID = 0;
 		if (session != null) {
 			// https://stackoverflow.com/questions/6031278/session-attribute-access-and-converting-to-int
+			// unsure if we needed to cite the stackoverflow thread
 			userID = (Integer) session.getAttribute("userID");
 			active_session = true;
 		}
@@ -52,14 +52,14 @@ public class CalendarServlet extends HttpServlet {
 			st = conn.createStatement();
 			
 			String query = "";
-			// SQL query if the user is logged in (getting universities from SQL with userID)
+			// sql query if the user is logged in (getting unis from SQL with userID)
 			if (active_session) {
 				query = "SELECT u.UniversityName, u.CalendarDates " +
 	                    "FROM UserUniversity uu " +
 	                    "JOIN Universities u ON uu.uniID = u.uniID " +
 	                    "WHERE uu.userID = " + userID;
 			}
-			// SQL query if the user isn't logged in (getting universities from URL in the form of uni IDs)
+			// sql query if the user isn't logged in (getting all unis from URL in the form of uni IDs)
 			else {
 			    String[] universityIDs = request.getParameter("universities").split(",");
 			    String id_list = "";
@@ -74,7 +74,7 @@ public class CalendarServlet extends HttpServlet {
 			}
 			rs = st.executeQuery(query);
 			
-			// Storing the break times in a map
+			// break times are stored in a map
 			Map<String, String[]> breaks = new HashMap<>();
 			while (rs.next()) {
 			    String uni = rs.getString("UniversityName");
@@ -99,7 +99,7 @@ public class CalendarServlet extends HttpServlet {
 			    }
 			}
 			
-			// Sending break dates to frontend as JSON object
+			// sending break dates to frontend as JSON object
 			JsonObjectBuilder json_builder = Json.createObjectBuilder();
 			for (Map.Entry<String, String[]> entry : breaks.entrySet()) {
 				String uni_name = entry.getKey();
@@ -114,7 +114,7 @@ public class CalendarServlet extends HttpServlet {
 
 		} 
 		
-		// Catching errors 
+		// catch blocks
 		catch (SQLException sqle) {
 			System.out.println("SQLException: " + sqle.getMessage());
 		} 
@@ -123,8 +123,9 @@ public class CalendarServlet extends HttpServlet {
 			System.out.println ("ClassNotFoundException: " + e.getMessage());
 		} 
 		
-		// Closing objects
+		// closing objects
 		// https://stackoverflow.com/questions/22671697/try-try-with-resources-and-connection-statement-and-resultset-closing
+		// another citation
 		finally {
 		    try {
 		        if (conn != null) conn.close();

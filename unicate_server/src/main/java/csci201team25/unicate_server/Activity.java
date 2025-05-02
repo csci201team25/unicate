@@ -48,8 +48,16 @@ public class Activity {
 	
 	@ManyToOne
 	@JoinColumn(name = "uniID")
-	@JsonIgnoreProperties("activities") // prevent circular serialization
+	@JsonIgnoreProperties("activities")
 	private University university;
+
+	public University getUniversity() {
+		return university;
+	}
+	
+	public University setUniversity() {
+		return university;
+	}
 
 	@Override
 	public String toString() {

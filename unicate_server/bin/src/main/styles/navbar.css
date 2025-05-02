@@ -1,0 +1,44 @@
+/* navbar stuff */
+.navbar {
+    width: 100%;
+    position: fixed;
+    top: 0; 
+    left: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: "Noto Sans", sans-serif;
+    padding: 10px 20px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+}
+
+.navbar-left .nav-link {
+    font-size: 1.2em;
+    font-weight: 700;
+    text-decoration: none;
+}  
+
+.navbar-right {
+    display: flex;
+    gap: 24px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: white;
+    font-weight: 400;
+    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 6px;
+}
+
+.nav-link:hover {
+    color: white; 
+    text-decoration: none; 
+}
+
+.nav-link.outlined {
+    border: 1px solid white;
+}
