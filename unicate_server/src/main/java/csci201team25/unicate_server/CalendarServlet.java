@@ -1,10 +1,12 @@
+package csci201team25.unicate_server;
+
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-import javax.json.*;
+import jakarta.json.*;
 import java.io.IOException;
 import java.io.StringReader;
 import java.sql.Connection;

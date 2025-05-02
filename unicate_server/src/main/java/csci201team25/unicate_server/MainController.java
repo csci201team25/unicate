@@ -1,6 +1,7 @@
 package csci201team25.unicate_server;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -15,7 +16,7 @@ public class MainController {
         return "<h3>Hello world!</h3>";
     }
 
-    @RequestMapping("/")
+    @RequestMapping({"/", "home.html"})
     public String homePage() {
     	return "Home";
     }
@@ -25,8 +26,23 @@ public class MainController {
     	return "AddSchool";
     }
 
-    @RequestMapping(value="/Login.html", method=RequestMethod.GET)
+    @RequestMapping(value={"/Login.html", "/login.html"}, method=RequestMethod.GET)
     public String loginPage() {
     	return "login";
+    }
+
+    @GetMapping(value="/calendar.html")
+    public String calendarPage() {
+        return "calendar";
+    }
+
+    @GetMapping(value="/post.html")
+    public String postPage() {
+        return "post";
+    }
+
+    @GetMapping(value="/activities.html")
+    public String activitiesPage() {
+        return "activities";
     }
 }

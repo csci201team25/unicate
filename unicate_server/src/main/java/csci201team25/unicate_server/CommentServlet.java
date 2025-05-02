@@ -7,10 +7,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -36,7 +36,7 @@ public class CommentServlet extends HttpServlet {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             try (Connection conn = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/unicate?serverTimezone=UTC", 
+                    "jdbc:mysql://localhost:3306/unicate?serverTimezone=UTC",
                     "root", "root")) {
 
                 try (PreparedStatement stmt = conn.prepareStatement(
@@ -102,7 +102,7 @@ public class CommentServlet extends HttpServlet {
                         }
 
                         String json = new Gson().toJson(commentList);
-                        resp.getWriter().write(json); 
+                        resp.getWriter().write(json);
                     }
                 }
             }

@@ -3,7 +3,7 @@
 
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="../unicate_server/src/main/styles/navbar.css">
+    <link rel="stylesheet" href="/navbar.css">
     <title>Universities</title>
     <style>
         #header {
@@ -74,8 +74,8 @@
     </div>
     <div id="content">
         <div id="loginForm">
-            <form id="login-form">
-                <hr id="line" style="height:2px;border-width:10;color:rgb(206, 125, 27);background-color:rgb(206, 125, 27)">
+            <form id="login-form" action="/CalendarServlet" method="get">
+                <hr id="line" style="height:2px;border-width:10px;color:rgb(206, 125, 27);background-color:rgb(206, 125, 27)">
                 <p id="login-text">If you would like to save your work, click here to 
                     <a href="Login.html">Login</a>.
                 </p>

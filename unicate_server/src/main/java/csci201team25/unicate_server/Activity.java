@@ -10,11 +10,9 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Activity {
 	@Id
 	@Column(name="actID")
-	private Long actID;
-	public Long getActID() {
-		return actID;
-	}
-	public void setActID(Long actID) {
+	private int actID;
+	public int getActID() { return actID; }
+	public void setActID(int actID) {
 		this.actID = actID;
 	}
 
