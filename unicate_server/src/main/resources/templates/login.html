@@ -109,21 +109,20 @@
 	        	$.ajax({
 	                url: "LoginVerify",
 	                type: "POST",
-	                datatype: 'text',
+	                datatype: 'json',
 	                data: {
 	                	Username: name,
 	                	Password: password
 	                },
 	                success: function (data) {
-	                    if (data === "verified") {
-	                    	localStorage.setItem("login", "yes");
-	                    	console.log("Logged In")
-				localStorage.setItem("username", "" + name);
-	                	window.location.href = "add-university.html";
-	                    }
-	                    else {
-	                    	document.querySelector("#password-error").innerHTML = "Incorrect Information."
-	                    }
+	                    if (data.status === "verified") {
+                            localStorage.setItem("login", "yes");
+                            localStorage.setItem("username", data.username);
+                            localStorage.setItem("userId", data.userID); // store user ID as well
+                            window.location.href = "add-university.html";
+                        } else {
+                            document.querySelector("#password-error").innerHTML = "Incorrect Information.";
+                        }
 			    	},
 		            error: function (e) {
 		                console.log("AJAX Error")
