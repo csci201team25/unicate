@@ -11,8 +11,8 @@ import com.google.gson.JsonParser;
 
 import jakarta.persistence.*;
 
-/* Representation of the Universities Table in the DB */
-/* Each instance of this class corresponds to the entries */
+// representation of the universities table in the DB 
+// each instance of this class corresponds to the entries 
 @Entity
 @Table(name="universities")
 public class University {

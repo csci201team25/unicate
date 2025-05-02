@@ -17,6 +17,7 @@ import com.google.gson.JsonObject;
 
 @WebServlet("/comment-servlet")
 public class CommentServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
