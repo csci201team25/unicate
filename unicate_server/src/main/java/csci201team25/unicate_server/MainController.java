@@ -21,9 +21,9 @@ public class MainController {
     	return "Home";
     }
 
-    @RequestMapping(value="/AddSchool.html", method=RequestMethod.GET)
+    @RequestMapping(value="/add-university.html", method=RequestMethod.GET)
     public String addSchoolPage() {
-    	return "AddSchool";
+    	return "add-university";
     }
 
     @RequestMapping(value={"/Login.html", "/login.html"}, method=RequestMethod.GET)
@@ -31,7 +31,7 @@ public class MainController {
     	return "login";
     }
 
-    @GetMapping(value="/register.html")
+    @GetMapping(value={"/register.html", "/Register.html"})
     public String registerPage() { return "register"; }
 
     @GetMapping(value="/calendar.html")

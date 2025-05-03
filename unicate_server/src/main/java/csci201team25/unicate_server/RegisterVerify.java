@@ -36,7 +36,7 @@ public class RegisterVerify extends HttpServlet {
 
             ps.executeUpdate();
             // relatively simple registration verification
-            response.sendRedirect("AddSchool.html");
+            response.sendRedirect("add-university.html");
             return;
 
         } 

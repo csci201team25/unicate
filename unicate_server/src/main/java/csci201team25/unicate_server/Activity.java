@@ -45,7 +45,17 @@ public class Activity {
 		this.actImage = actImage;
 	}
 
-	
+	@Column(name = "description")
+	private String description;
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	@ManyToOne
 	@JoinColumn(name = "uniID")
 	@JsonIgnoreProperties("activities")

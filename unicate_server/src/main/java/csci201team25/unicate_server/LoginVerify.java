@@ -5,70 +5,60 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+
+import java.sql.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.google.gson.Gson;
 
 @WebServlet("/LoginVerify")
 public class LoginVerify extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	boolean isName = false;
+
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Connection conn = null;
-		Statement st = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		// relatively basic login verification
+
+		String username = request.getParameter("Username");
+		String password = request.getParameter("Password");
+
+		Map<String, Object> result = new HashMap<>();
+
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			conn = DriverManager.getConnection("jdbc:mysql://localhost/unicate?user=root&password=root");
-			// inserting the details by hard coding again; subject to change into variables
-			st = conn.createStatement();
-			ps = conn.prepareStatement("SELECT * FROM users WHERE Username = \'" + request.getParameter("Username") + "\' AND HashedPassword = \'" + request.getParameter("Password") + "\';");
+
+			ps = conn.prepareStatement("SELECT * FROM users WHERE Username = ? AND HashedPassword = ?");
+			ps.setString(1, username);
+			ps.setString(2, password);
 			rs = ps.executeQuery();
-			isName = false;
+
 			if (rs.next()) {
-				isName = true;
+				int userID = rs.getInt("userID");
+
+				result.put("status", "verified");
+				result.put("userID", userID);
+				result.put("username", username);
+			} else {
+				result.put("status", "incorrect");
 			}
-		// catch blocks for errors
-		} catch (SQLException s) {
-			System.out.println ("Exception: " + s.getMessage());
-		} catch (ClassNotFoundException c) {
-			System.out.println ("Exception: " + c.getMessage());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.put("status", "error");
 		} finally {
-			try {
-				// closing in the finally block
-				if (rs != null) {
-					rs.close();
-				}
-				if (st != null) {
-					st.close();
-				}
-				if (ps != null) {
-					ps.close();
-				}
-				if (conn != null) {
-					conn.close();
-				}
-			} catch (SQLException sqle) {
-				System.out.println("sqle: " + sqle.getMessage());
-			}
+			try { if (rs != null) rs.close(); } catch (SQLException ignored) {}
+			try { if (ps != null) ps.close(); } catch (SQLException ignored) {}
+			try { if (conn != null) conn.close(); } catch (SQLException ignored) {}
 		}
-		// just writing the output directly into an error in the browser
-		// Note; should change to in-field error messages
-		String output = "incorrect";
-		if (isName) {
-			output = "verified";
-		}
+
+		response.setContentType("application/json");
 		PrintWriter out = response.getWriter();
-		System.out.println("Output: " + output);
-		response.setContentType("text/plain");
-        out.print(output);
-        out.flush();
+		out.print(new Gson().toJson(result));
+		out.flush();
 	}
 }

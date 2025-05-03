@@ -67,6 +67,10 @@ h2 {
     position: relative;
 }
 
+.day:hover {
+	background-color: rgb(62, 113, 159);
+}
+
 .overlap-day {
     background-color: #de8100 !important;
     color: black;
@@ -90,4 +94,9 @@ h2 {
 .prev-month,
 .next-month {
     background-color: #616870;
+}
+
+.prev-month:hover,
+.next-month:hover {
+	background-color: rgb(158, 167, 180);
 }

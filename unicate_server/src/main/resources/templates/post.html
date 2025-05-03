@@ -49,13 +49,6 @@
       margin-top: 10px;
     }
 
-    .navbar {
-      position: absolute;
-      top: 0;
-      width: 90%;
-      z-index: 3;
-      background: none;
-    }
     .post-page {
         padding-top: 0;
         padding-left: 0px;
@@ -70,11 +63,86 @@
         resize: vertical;
         width: 100%;
         border-radius: 10px;
-        border: 1px solid black;
         background-color: rgba(255, 255, 255, 0.05);
-        color: black;
+        border: 1px solid #F2F2F2;
+        color: #F2F2F2;
         font-family: "Noto Sans", sans-serif;
     }
+
+    body.post-page {
+      background-color: #081727;
+      color: #F2F2F2;
+    }
+
+    .left-column, .right-column, .comments-section, .comment-form-container {
+      color: #F2F2F2;
+    }
+
+    h2 {
+      color: #F2F2F2;
+    }
+
+    .formlabel {
+      color: #F2F2F2;
+    }
+
+    .formbutton {
+      background-color: #FFA800;
+      color: #081727;
+      border: none;
+      padding: 8px 16px;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .formbutton:hover {
+      background-color: #cc8600;
+    }
+
+    .back-button-container {
+      text-align: left;
+      padding: 20px;
+    }
+
+    .back-button {
+      display: inline-block;
+      background: none;
+      color: #a9a9a9;
+      padding: 8px 16px;
+      font-weight: bold;
+      border: 2px solid #a9a9a9;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .back-button:hover {
+      background-color: #a9a9a9;
+      color: #1a1a1a;
+    }
+
+    .content-wrapper {
+      max-width: 1200px;
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 40px;
+      box-sizing: border-box;
+    }
+
+
+    /* Make sure columns still display inline */
+    .main-columns {
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
+    }
+
+    .left-column, .right-column {
+      flex: 1;
+    }
+
   </style>
 </head>
 <body bgcolor="white" class="post-page">
@@ -85,32 +153,40 @@
         <h3 class="hero-subtitle">Location</h3>
         </div>
     </section>
-    <nav class="navbar">
-        <div class="navbar-left">Campfire</div>
+    <!-- im sorry this is so jank but it had to be done -->
+    <nav class="navbar" style="max-width: 97%;"> 
+        <div class="navbar-left">
+            <a href="home.html" class="nav-link">Campfire</a>
+        </div>
         <div class="navbar-right">
-            <a href="#" class="nav-link">Calendar</a>
-            <a href="#" class="nav-link outlined">Sign In / Sign Up</a>
+            <!-- filled by navbar.js -->
         </div>
     </nav>
 
-    <div class="main-columns">
-        <div class="left-column">
-        <h2>Description</h2>
-        <p>Blah blah blah.</p>
-        </div>
-        <div class="right-column">
-        <h2>What are People Saying?</h2>
-        <div class="comments-section">
-        </div>
-        </div>
-    </div>
-
-    <div class="comment-form-container">
-        <form id="comment-form">
-        <label for="comment" class="formlabel">Comment</label>
-        <textarea id="comment" class="comment-box" rows="4" placeholder="What did you think?"></textarea>
-        <button class="formbutton" type="submit">Post</button>
-        </form>
+    <div class="content-wrapper">
+      <div class="back-button-container">
+        <a href="activities.html" class="back-button">← Back to Activities</a>
+      </div>
+      
+      <div class="main-columns">
+          <div class="left-column">
+          <h2>Description</h2>
+          <p id="activity-description">Loading description...</p>
+          </div>
+          <div class="right-column">
+          <h2 id="comments-header">What are People Saying?</h2>
+          <div class="comments-section">
+          </div>
+          </div>
+      </div>   
+  
+      <div class="comment-form-container">
+          <form id="comment-form">
+          <label for="comment" class="formlabel">Comment</label>
+          <textarea id="comment" class="comment-box" rows="4" placeholder="What did you think?"></textarea>
+          <button class="formbutton" type="submit">Post</button>
+          </form>
+      </div>
     </div>
 
     <script>
@@ -119,7 +195,7 @@
 
       async function loadActivityDetails() {
         try {
-          const res = await fetch(`http://localhost:8080/api/activities`); // temp
+          const res = await fetch(`http://localhost:8080/api/activities`);
           const activities = await res.json();
           const activity = activities.find(a => a.actID == actId);
 
@@ -127,6 +203,7 @@
             document.querySelector(".hero-title").textContent = activity.actName;
             document.querySelector(".hero-subtitle").textContent = `${activity.university.universityName} • ${activity.actLocation}`;
             document.getElementById("hero-banner").style.backgroundImage = `url('${activity.actImage}')`;
+            document.getElementById("activity-description").textContent = activity.description || "No description available.";
           }
         } catch (err) {
           console.error("Failed to load activity details:", err);
@@ -141,11 +218,18 @@
             const commentsSection = document.querySelector(".comments-section");
             commentsSection.innerHTML = "";
 
-            comments.forEach(comment => {
-              const p = document.createElement("p");
-              p.innerHTML = `<strong>@${comment.username}:</strong> ${comment.bodyText}`;
-              commentsSection.appendChild(p);
-            });
+            const header = document.getElementById("comments-header");
+
+            if (comments.length === 0) {
+              header.textContent = "No comments yet.";
+            } else {
+              header.textContent = "What are People Saying?";
+              comments.forEach(comment => {
+                const p = document.createElement("p");
+                p.innerHTML = `<strong>@${comment.username}:</strong> ${comment.bodyText}`;
+                commentsSection.appendChild(p);
+              });
+            }
           } else {
             console.error("Failed to load comments.");
           }
@@ -157,10 +241,10 @@
       document.getElementById("comment-form").addEventListener("submit", async (e) => {
         e.preventDefault();
 
-        const comment = document.getElementById("comment").value;
-        const userId = 1; // TEMP: Replace with actual user ID later
+        const comment = document.getElementById("comment").value.trim();
+        const userId = parseInt(localStorage.getItem("userId"), 10);
 
-        if (!comment.trim()) {
+        if (!comment) {
           alert("Comment cannot be empty.");
           return;
         }
@@ -168,7 +252,9 @@
         try {
           const res = await fetch("comment-servlet", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+              "Content-Type": "application/json"
+            },
             body: JSON.stringify({
               text: comment,
               userId: userId,
@@ -177,15 +263,15 @@
           });
 
           if (res.ok) {
-            alert("Comment posted!");
             document.getElementById("comment").value = "";
-            await loadComments();
+            await loadComments(); // refresh the comments section
           } else {
-            alert("Failed to post comment.");
+            const errText = await res.text();
+            console.error("Failed to post comment:", errText);
           }
         } catch (error) {
           console.error("Error posting comment:", error);
-          alert("Server error occurred.");
+          alert("A server error occurred. Please try again later.");
         }
       });
 
@@ -202,7 +288,9 @@
         loadActivityDetails();
         loadComments();
     });
-	</script>    
+	</script> 
+
+  <script src="/navbar.js"></script>   
 </body>
 </html>
 

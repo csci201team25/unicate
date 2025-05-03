@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Calendar Display</title>
     <link rel="stylesheet" href="/navbar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/calendar.css">
 </head>
 <body>
@@ -83,28 +84,36 @@
 	// this function accepts a start (s) and end (e) and returns a range of days between them (inclusive)
 	// https://stackoverflow.com/questions/4413590/javascript-get-array-of-dates-between-2-dates
 	const get_days_array = function(s,e) {const a=[];for(const d=new Date(s);d<=new Date(e);d.setDate(d.getDate()+1)){ a.push(d.toISOString().split('T')[0]);}return a;};
-
     	// fetching from backend CalendarServlet
-	fetch('/unicate_test/CalendarServlet')
-		.then(response => response.json())
+	fetch('/CalendarServlet' + window.location.search)
+		.then(response => response.json() )
 	        .then(data => {
 	        	// tallying the days that are in Spring Break
 	        	const date_counts = new Map();
-	            	var num_universities = Object.keys(data).length;
+	            const uni_day_map = new Map();
+	        	var num_universities = Object.keys(data).length;
 	            
-	            	for (const key in data) {
-		            	const start = data[key][0];
-		            	const end = data[key][1];
-		            	const range = get_days_array(start, end);
-		            	for (const date of range) {
-		                	date_counts.set(date, (date_counts.get(date) || 0) + 1);
-		                }
-	            	}
+            	for (const key in data) {
+	            	const start = data[key][0];
+	            	const end = data[key][1];
+	            	const range = get_days_array(start, end);
+	            	for (const date of range) {
+	                	date_counts.set(date, (date_counts.get(date) || 0) + 1);
+	                	if (!uni_day_map.has(date)) {
+	            			uni_day_map.set(date, []);
+	            		}
+	            		uni_day_map.get(date).push(key);
+	                }
+            	}
 	            
 		        // modifying html to display the event days
 		        const days = document.querySelectorAll(".day");
 		        for (const day of days) {
-		                const date = day.getAttribute("data-date");
+		        		const date = day.getAttribute("data-date");
+			        	// const unis = uni_day_map.get(date);
+			    		// if (unis) {
+			    		// 	day.setAttribute(unis.join(", "));
+			    		// }
 		                const tally = date_counts.get(date) || 0;
 	
 		                // not a break day

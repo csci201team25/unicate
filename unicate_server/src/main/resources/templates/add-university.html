@@ -55,6 +55,18 @@
             margin-bottom: 25px;
         }
     </style>
+    <script>
+    	document.addEventListener("DOMContentLoaded", function() {
+        	if(localStorage.getItem("login") === "yes"){
+        		const logintest = document.getElementById("login-text");
+                logintest.style.display = 'none';
+        	}
+            else{
+        		const logintest = document.getElementById("login-text");
+                logintest.style.display = 'inline';
+            }
+    	})
+	</script>
 </head>
 
 <body>
@@ -105,7 +117,7 @@
     </div>
 <script>
 	// Fetching from backend AddUniversitiesServlet
-	fetch('/unicate_test/AddUniversitiesServlet')
+	fetch('/AddUniversitiesServlet')
 		.then(response => response.json())
 		.then(data => {
 	    		// Populating dropdown options with all universities in the database

@@ -45,6 +45,10 @@
         #content {
             display: flex;
         }
+	#registration {
+	    margin-left: 150px;
+	    margin-top: 10px;
+	}
     </style>
 </head>
 
@@ -76,16 +80,19 @@
                     <small id="password-error" class="form-text text-danger"></small>
                 </div>
                 <button id="submit" class="btn btn-primary">Submit</button>
-                <button id="logout" class="btn">Logout</button>
             </form>
+	<button id="registration" class="btn">Register</button>
         </div>
     </div>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script>
-	document.querySelector("#logout").onclick = function () {
-	    localStorage.clear()
-	    console.log("Logged Out")
-	    window.location.href = "Home.html";
+	// document.querySelector("#logout").onclick = function () {
+	//     localStorage.clear()
+	//     console.log("Logged Out")
+	//     window.location.href = "Home.html";
+	// }
+	document.querySelector("#registration").onclick = function () {
+	    window.location.href = "Register.html";
 	}
 	document.querySelector("#submit").onclick = function () {
 	    let submission = true
@@ -102,21 +109,20 @@
 	        	$.ajax({
 	                url: "LoginVerify",
 	                type: "POST",
-	                datatype: 'text',
+	                datatype: 'json',
 	                data: {
 	                	Username: name,
 	                	Password: password
 	                },
 	                success: function (data) {
-	                    if (data === "verified") {
-	                    	localStorage.setItem("login", "yes");
-	                    	console.log("Logged In")
-				localStorage.setItem("username", "" + name);
-	                	window.location.href = "add-university.html";
-	                    }
-	                    else {
-	                    	document.querySelector("#password-error").innerHTML = "Incorrect Information."
-	                    }
+	                    if (data.status === "verified") {
+                            localStorage.setItem("login", "yes");
+                            localStorage.setItem("username", data.username);
+                            localStorage.setItem("userId", data.userID); // store user ID as well
+                            window.location.href = "add-university.html";
+                        } else {
+                            document.querySelector("#password-error").innerHTML = "Incorrect Information.";
+                        }
 			    	},
 		            error: function (e) {
 		                console.log("AJAX Error")
