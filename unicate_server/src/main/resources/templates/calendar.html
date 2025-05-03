@@ -90,29 +90,30 @@
 	        .then(data => {
 	        	// tallying the days that are in Spring Break
 	        	const date_counts = new Map();
-	            	var num_universities = Object.keys(data).length;
+	            const uni_day_map = new Map();
+	        	var num_universities = Object.keys(data).length;
 	            
-	            	for (const key in data) {
-		            	const start = data[key][0];
-		            	const end = data[key][1];
-		            	const range = get_days_array(start, end);
-		            	for (const date of range) {
-		                	date_counts.set(date, (date_counts.get(date) || 0) + 1);
-		                }
-	            	}
+            	for (const key in data) {
+	            	const start = data[key][0];
+	            	const end = data[key][1];
+	            	const range = get_days_array(start, end);
+	            	for (const date of range) {
+	                	date_counts.set(date, (date_counts.get(date) || 0) + 1);
+	                	if (!uni_day_map.has(date)) {
+	            			uni_day_map.set(date, []);
+	            		}
+	            		uni_day_map.get(date).push(key);
+	                }
+            	}
 	            
 		        // modifying html to display the event days
 		        const days = document.querySelectorAll(".day");
 		        for (const day of days) {
-				day.addEventListener('mouseover', function(event) {
-					const curr_inn = day.innerHTML;
-					day.innerHTML = "University Name";
-				});
-				div.addEventListener('mouseout', function() {
-      					day.innerHTML = curr_in;
-    				});
-				
-		                const date = day.getAttribute("data-date");
+		        		const date = day.getAttribute("data-date");
+			        	const unis = uni_day_map.get(date);
+			    		if (unis) {
+			    			day.setAttribute(unis.join(", "));
+			    		}
 		                const tally = date_counts.get(date) || 0;
 	
 		                // not a break day
