@@ -1,142 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Calendar Display</title>
-    <link rel="stylesheet" href="/navbar.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/calendar.css">
-</head>
-<body>
+    <link rel="stylesheet" href="/navbar.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/calendar.css" />
+  </head>
+  <body>
     <!-- for some reason the navbar is weirdly wide on this page so the width is set manually -->
-    <nav class="navbar" style="max-width: 1380px;">
-        <div class="navbar-left">
-            <a href="home.html" class="nav-link">Campfire</a>
-        </div>
-        <div class="navbar-right">
-            <!-- filled by navbar.js -->
-        </div>
+    <nav class="navbar" style="max-width: 1380px">
+      <div class="navbar-left">
+        <a href="home.html" class="nav-link">Campfire</a>
+      </div>
+      <div class="navbar-right">
+        <!-- filled by navbar.js -->
+      </div>
     </nav>
 
     <div class="calendar-container">
-        <h1>Calendar Display for Spring Break in 2025</h1>
-        <h2>March</h2>
-        <div class="calendar">
-            <div class="calendar-titles">
-                <div class="weekday">Sun</div>
-                <div class="weekday">Mon</div>
-                <div class="weekday">Tues</div>
-                <div class="weekday">Wed</div>
-                <div class="weekday">Thurs</div>
-                <div class="weekday">Fri</div>
-                <div class="weekday">Sat</div>
-            </div>
-            <div class="calendar-days">
-                <!-- February -->
-                <div class="day prev-month" data-date="2025-02-23">23</div>
-                <div class="day prev-month" data-date="2025-02-24">24</div>
-                <div class="day prev-month" data-date="2025-02-25">25</div>
-                <div class="day prev-month" data-date="2025-02-26">26</div>
-                <div class="day prev-month" data-date="2025-02-27">27</div>
-                <div class="day prev-month" data-date="2025-02-28">28</div>
-                <!-- March -->
-                <div class="day" data-date="2025-03-01">1</div>
-                <div class="day" data-date="2025-03-02">2</div>
-                <div class="day" data-date="2025-03-03">3</div>
-                <div class="day" data-date="2025-03-04">4</div>
-                <div class="day" data-date="2025-03-05">5</div>
-                <div class="day" data-date="2025-03-06">6</div>
-                <div class="day" data-date="2025-03-07">7</div>
-                <div class="day" data-date="2025-03-08">8</div>
-                <div class="day" data-date="2025-03-09">9</div>
-                <div class="day" data-date="2025-03-10">10</div>
-                <div class="day" data-date="2025-03-11">11</div>
-                <div class="day" data-date="2025-03-12">12</div>
-                <div class="day" data-date="2025-03-13">13</div>
-                <div class="day" data-date="2025-03-14">14</div>
-                <div class="day" data-date="2025-03-15">15</div>
-                <div class="day" data-date="2025-03-16">16</div>
-                <div class="day" data-date="2025-03-17">17</div>
-                <div class="day" data-date="2025-03-18">18</div>
-                <div class="day" data-date="2025-03-19">19</div>
-                <div class="day" data-date="2025-03-20">20</div>
-                <div class="day" data-date="2025-03-21">21</div>
-                <div class="day" data-date="2025-03-22">22</div>
-                <div class="day" data-date="2025-03-23">23</div>
-                <div class="day" data-date="2025-03-24">24</div>
-                <div class="day" data-date="2025-03-25">25</div>
-                <div class="day" data-date="2025-03-26">26</div>
-                <div class="day" data-date="2025-03-27">27</div>
-                <div class="day" data-date="2025-03-28">28</div>
-                <div class="day" data-date="2025-03-29">29</div>
-                <div class="day" data-date="2025-03-30">30</div>
-                <div class="day" data-date="2025-03-31">31</div>
-                <!-- April -->
-                <div class="day next-month" data-date="2025-04-01">1</div>
-                <div class="day next-month" data-date="2025-04-02">2</div>
-                <div class="day next-month" data-date="2025-04-03">3</div>
-                <div class="day next-month" data-date="2025-04-04">4</div>
-                <div class="day next-month" data-date="2025-04-05">5</div>
-              </div>              
+      <h1>Calendar Display for Spring Break in 2025</h1>
+      <h2>March</h2>
+      <div class="calendar">
+        <div class="calendar-titles">
+          <div class="weekday">Sun</div>
+          <div class="weekday">Mon</div>
+          <div class="weekday">Tues</div>
+          <div class="weekday">Wed</div>
+          <div class="weekday">Thurs</div>
+          <div class="weekday">Fri</div>
+          <div class="weekday">Sat</div>
         </div>
+        <div class="calendar-days">
+          <!-- February -->
+          <div class="day prev-month" data-date="2025-02-23">23</div>
+          <div class="day prev-month" data-date="2025-02-24">24</div>
+          <div class="day prev-month" data-date="2025-02-25">25</div>
+          <div class="day prev-month" data-date="2025-02-26">26</div>
+          <div class="day prev-month" data-date="2025-02-27">27</div>
+          <div class="day prev-month" data-date="2025-02-28">28</div>
+          <!-- March -->
+          <div class="day" data-date="2025-03-01">1</div>
+          <div class="day" data-date="2025-03-02">2</div>
+          <div class="day" data-date="2025-03-03">3</div>
+          <div class="day" data-date="2025-03-04">4</div>
+          <div class="day" data-date="2025-03-05">5</div>
+          <div class="day" data-date="2025-03-06">6</div>
+          <div class="day" data-date="2025-03-07">7</div>
+          <div class="day" data-date="2025-03-08">8</div>
+          <div class="day" data-date="2025-03-09">9</div>
+          <div class="day" data-date="2025-03-10">10</div>
+          <div class="day" data-date="2025-03-11">11</div>
+          <div class="day" data-date="2025-03-12">12</div>
+          <div class="day" data-date="2025-03-13">13</div>
+          <div class="day" data-date="2025-03-14">14</div>
+          <div class="day" data-date="2025-03-15">15</div>
+          <div class="day" data-date="2025-03-16">16</div>
+          <div class="day" data-date="2025-03-17">17</div>
+          <div class="day" data-date="2025-03-18">18</div>
+          <div class="day" data-date="2025-03-19">19</div>
+          <div class="day" data-date="2025-03-20">20</div>
+          <div class="day" data-date="2025-03-21">21</div>
+          <div class="day" data-date="2025-03-22">22</div>
+          <div class="day" data-date="2025-03-23">23</div>
+          <div class="day" data-date="2025-03-24">24</div>
+          <div class="day" data-date="2025-03-25">25</div>
+          <div class="day" data-date="2025-03-26">26</div>
+          <div class="day" data-date="2025-03-27">27</div>
+          <div class="day" data-date="2025-03-28">28</div>
+          <div class="day" data-date="2025-03-29">29</div>
+          <div class="day" data-date="2025-03-30">30</div>
+          <div class="day" data-date="2025-03-31">31</div>
+          <!-- April -->
+          <div class="day next-month" data-date="2025-04-01">1</div>
+          <div class="day next-month" data-date="2025-04-02">2</div>
+          <div class="day next-month" data-date="2025-04-03">3</div>
+          <div class="day next-month" data-date="2025-04-04">4</div>
+          <div class="day next-month" data-date="2025-04-05">5</div>
+        </div>
+      </div>
     </div>
-<script>
-	// this function accepts a start (s) and end (e) and returns a range of days between them (inclusive)
-	// https://stackoverflow.com/questions/4413590/javascript-get-array-of-dates-between-2-dates
-	const get_days_array = function(s,e) {const a=[];for(const d=new Date(s);d<=new Date(e);d.setDate(d.getDate()+1)){ a.push(d.toISOString().split('T')[0]);}return a;};
-    	// fetching from backend CalendarServlet
-	fetch('/CalendarServlet' + window.location.search)
-		.then(response => response.json() )
-	        .then(data => {
-	        	// tallying the days that are in Spring Break
-	        	const date_counts = new Map();
-	            const uni_day_map = new Map();
-	        	var num_universities = Object.keys(data).length;
-	            
-            	for (const key in data) {
-	            	const start = data[key][0];
-	            	const end = data[key][1];
-	            	const range = get_days_array(start, end);
-	            	for (const date of range) {
-	                	date_counts.set(date, (date_counts.get(date) || 0) + 1);
-	                	if (!uni_day_map.has(date)) {
-	            			uni_day_map.set(date, []);
-	            		}
-	            		uni_day_map.get(date).push(key);
-	                }
-            	}
-	            
-		        // modifying html to display the event days
-		        const days = document.querySelectorAll(".day");
-		        for (const day of days) {
-		        		const date = day.getAttribute("data-date");
-			        	// const unis = uni_day_map.get(date);
-			    		// if (unis) {
-			    		// 	day.setAttribute(unis.join(", "));
-			    		// }
-		                const tally = date_counts.get(date) || 0;
-	
-		                // not a break day
-		                if (tally == 0) continue;
-		             	// full overlap
-		                else if (tally == num_universities) {
-		                	day.classList.add("overlap-day");
-		                }
-		                // partial overlap
-		                else if (tally > 0) {
-		                	day.classList.add("semi-overlap-day");
-		                }
-	                
-		                // adding tally of uni overlap
-		                // https://stackoverflow.com/questions/26542652/how-to-add-text-into-span-after-document-createelementspan
-		                const badge = document.createElement("span");
-		                badge.classList.add("day-count");
-		                badge.textContent = `${tally}/${num_universities}`;
-		                day.appendChild(badge);
-	        	}
-	    	})
-		.catch(error => console.error('Error:', error));
-</script>
-<script src="navbar.js"></script>
-</body>
-</html> 
+    <script>
+      // this function accepts a start (s) and end (e) and returns a range of days between them (inclusive)
+      // https://stackoverflow.com/questions/4413590/javascript-get-array-of-dates-between-2-dates
+      const get_days_array = function (s, e) {
+        const a = [];
+        for (
+          const d = new Date(s);
+          d <= new Date(e);
+          d.setDate(d.getDate() + 1)
+        ) {
+          a.push(d.toISOString().split("T")[0]);
+        }
+        return a;
+      };
+      // fetching from backend CalendarServlet
+
+      let queryString = window.location.search;
+      if (!queryString) {
+        let userid = localStorage.getItem("userId");
+        if (userid) {
+          queryString = "?userID=" + userid.trim();
+        }
+      }
+
+      // fetching from backend CalendarServlet
+      fetch("/CalendarServlet" + queryString)
+        .then((response) => response.json())
+        .then((data) => {
+          // tallying the days that are in Spring Break
+          const date_counts = new Map();
+          const uni_day_map = new Map();
+          var num_universities = Object.keys(data).length;
+
+          for (const key in data) {
+            const start = data[key][0];
+            const end = data[key][1];
+            const range = get_days_array(start, end);
+            for (const date of range) {
+              date_counts.set(date, (date_counts.get(date) || 0) + 1);
+              if (!uni_day_map.has(date)) {
+                uni_day_map.set(date, []);
+              }
+              uni_day_map.get(date).push(key);
+            }
+          }
+
+          // modifying html to display the event days
+          const days = document.querySelectorAll(".day");
+          for (const day of days) {
+            const date = day.getAttribute("data-date");
+            // const unis = uni_day_map.get(date);
+            // if (unis) {
+            // 	day.setAttribute(unis.join(", "));
+            // }
+            const tally = date_counts.get(date) || 0;
+
+            // not a break day
+            if (tally == 0) continue;
+            // full overlap
+            else if (tally == num_universities) {
+              day.classList.add("overlap-day");
+            }
+            // partial overlap
+            else if (tally > 0) {
+              day.classList.add("semi-overlap-day");
+            }
+
+            // adding tally of uni overlap
+            // https://stackoverflow.com/questions/26542652/how-to-add-text-into-span-after-document-createelementspan
+            const badge = document.createElement("span");
+            badge.classList.add("day-count");
+            badge.textContent = `${tally}/${num_universities}`;
+            day.appendChild(badge);
+          }
+        })
+        .catch((error) => console.error("Error:", error));
+    </script>
+    <script src="navbar.js"></script>
+  </body>
+</html>
