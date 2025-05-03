@@ -70,7 +70,7 @@
     }
 
     body.post-page {
-      background-color: #1a1a1a;
+      background-color: #081727;
       color: #F2F2F2;
     }
 
@@ -79,16 +79,16 @@
     }
 
     h2 {
-      color: #FFA800;
+      color: #F2F2F2;
     }
 
     .formlabel {
-      color: #FFA800;
+      color: #F2F2F2;
     }
 
     .formbutton {
       background-color: #FFA800;
-      color: #1a1a1a;
+      color: #081727;
       border: none;
       padding: 8px 16px;
       font-weight: bold;
@@ -99,6 +99,50 @@
     .formbutton:hover {
       background-color: #cc8600;
     }
+
+    .back-button-container {
+      text-align: left;
+      padding: 20px;
+    }
+
+    .back-button {
+      display: inline-block;
+      background: none;
+      color: #a9a9a9;
+      padding: 8px 16px;
+      font-weight: bold;
+      border: 2px solid #a9a9a9;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background-color 0.3s ease;
+    }
+
+    .back-button:hover {
+      background-color: #a9a9a9;
+      color: #1a1a1a;
+    }
+
+    .content-wrapper {
+      max-width: 1200px;
+      width: 90%;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 40px;
+      box-sizing: border-box;
+    }
+
+
+    /* Make sure columns still display inline */
+    .main-columns {
+      display: flex;
+      gap: 40px;
+      align-items: flex-start;
+    }
+
+    .left-column, .right-column {
+      flex: 1;
+    }
+
   </style>
 </head>
 <body bgcolor="white" class="post-page">
@@ -119,24 +163,30 @@
         </div>
     </nav>
 
-    <div class="main-columns">
-        <div class="left-column">
-        <h2>Description</h2>
-        <p id="activity-description">Loading description...</p>
-        </div>
-        <div class="right-column">
-        <h2 id="comments-header">What are People Saying?</h2>
-        <div class="comments-section">
-        </div>
-        </div>
-    </div>
-
-    <div class="comment-form-container">
-        <form id="comment-form">
-        <label for="comment" class="formlabel">Comment</label>
-        <textarea id="comment" class="comment-box" rows="4" placeholder="What did you think?"></textarea>
-        <button class="formbutton" type="submit">Post</button>
-        </form>
+    <div class="content-wrapper">
+      <div class="back-button-container">
+        <a href="activities.html" class="back-button">← Back to Activities</a>
+      </div>
+      
+      <div class="main-columns">
+          <div class="left-column">
+          <h2>Description</h2>
+          <p id="activity-description">Loading description...</p>
+          </div>
+          <div class="right-column">
+          <h2 id="comments-header">What are People Saying?</h2>
+          <div class="comments-section">
+          </div>
+          </div>
+      </div>   
+  
+      <div class="comment-form-container">
+          <form id="comment-form">
+          <label for="comment" class="formlabel">Comment</label>
+          <textarea id="comment" class="comment-box" rows="4" placeholder="What did you think?"></textarea>
+          <button class="formbutton" type="submit">Post</button>
+          </form>
+      </div>
     </div>
 
     <script>
