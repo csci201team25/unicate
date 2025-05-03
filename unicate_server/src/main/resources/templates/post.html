@@ -63,10 +63,41 @@
         resize: vertical;
         width: 100%;
         border-radius: 10px;
-        border: 1px solid black;
         background-color: rgba(255, 255, 255, 0.05);
-        color: black;
+        border: 1px solid #F2F2F2;
+        color: #F2F2F2;
         font-family: "Noto Sans", sans-serif;
+    }
+
+    body.post-page {
+      background-color: #1a1a1a;
+      color: #F2F2F2;
+    }
+
+    .left-column, .right-column, .comments-section, .comment-form-container {
+      color: #F2F2F2;
+    }
+
+    h2 {
+      color: #FFA800;
+    }
+
+    .formlabel {
+      color: #FFA800;
+    }
+
+    .formbutton {
+      background-color: #FFA800;
+      color: #1a1a1a;
+      border: none;
+      padding: 8px 16px;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .formbutton:hover {
+      background-color: #cc8600;
     }
   </style>
 </head>
@@ -94,7 +125,7 @@
         <p id="activity-description">Loading description...</p>
         </div>
         <div class="right-column">
-        <h2>What are People Saying?</h2>
+        <h2 id="comments-header">What are People Saying?</h2>
         <div class="comments-section">
         </div>
         </div>
@@ -114,7 +145,7 @@
 
       async function loadActivityDetails() {
         try {
-          const res = await fetch(`http://localhost:8080/api/activities`); // temp
+          const res = await fetch(`http://localhost:8080/api/activities`);
           const activities = await res.json();
           const activity = activities.find(a => a.actID == actId);
 
@@ -137,11 +168,18 @@
             const commentsSection = document.querySelector(".comments-section");
             commentsSection.innerHTML = "";
 
-            comments.forEach(comment => {
-              const p = document.createElement("p");
-              p.innerHTML = `<strong>@${comment.username}:</strong> ${comment.bodyText}`;
-              commentsSection.appendChild(p);
-            });
+            const header = document.getElementById("comments-header");
+
+            if (comments.length === 0) {
+              header.textContent = "No comments yet.";
+            } else {
+              header.textContent = "What are People Saying?";
+              comments.forEach(comment => {
+                const p = document.createElement("p");
+                p.innerHTML = `<strong>@${comment.username}:</strong> ${comment.bodyText}`;
+                commentsSection.appendChild(p);
+              });
+            }
           } else {
             console.error("Failed to load comments.");
           }
