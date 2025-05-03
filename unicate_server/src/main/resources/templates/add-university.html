@@ -115,7 +115,45 @@
             </form>
         </div>
     </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <script>
+	if (localStorage.getItem("login") === "yes") {
+		document.getElementById('login-form').addEventListener('submit', function(e) {
+			e.preventDefault();
+			const name1 = $('#Name1').value.trim();
+			const name2 = $('#Name2').value.trim();
+			const name3 = $('#Name3').value.trim();
+			const name4 = $('#Name4').value.trim();
+			const name5 = $('#Name5').value.trim();
+			const userID = localStorage.getItem("userId");
+			$.ajax({
+	                url: "UserUniversityServlet",
+	                type: "GET",
+	                datatype: 'text',
+	                data: {
+	                	userId: userId,
+				uni1: name1,
+				uni2: name2,
+				uni3: name3,
+				uni4: name4,
+				uni5: name5
+	                },
+	                success: function (data) {
+	                    if (data === "verified") {
+	                    	$('#login-form')[0].submit();
+	                    }
+	                    else {
+	                    	alert("Error.");
+	                    }
+			},
+		        error: function (e) {
+		            console.log("AJAX Error")
+		        }
+	            })
+		});
+       }
 	// Fetching from backend AddUniversitiesServlet
 	fetch('/AddUniversitiesServlet')
 		.then(response => response.json())
