@@ -110,10 +110,10 @@
 		        const days = document.querySelectorAll(".day");
 		        for (const day of days) {
 		        		const date = day.getAttribute("data-date");
-			        	const unis = uni_day_map.get(date);
-			    		if (unis) {
-			    			day.setAttribute(unis.join(", "));
-			    		}
+			        	// const unis = uni_day_map.get(date);
+			    		// if (unis) {
+			    		// 	day.setAttribute(unis.join(", "));
+			    		// }
 		                const tally = date_counts.get(date) || 0;
 	
 		                // not a break day
