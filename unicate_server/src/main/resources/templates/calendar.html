@@ -84,7 +84,6 @@
 	// this function accepts a start (s) and end (e) and returns a range of days between them (inclusive)
 	// https://stackoverflow.com/questions/4413590/javascript-get-array-of-dates-between-2-dates
 	const get_days_array = function(s,e) {const a=[];for(const d=new Date(s);d<=new Date(e);d.setDate(d.getDate()+1)){ a.push(d.toISOString().split('T')[0]);}return a;};
-
     	// fetching from backend CalendarServlet
 	fetch('/CalendarServlet' + window.location.search)
 		.then(response => response.json() )
@@ -105,10 +104,10 @@
 		        // modifying html to display the event days
 		        const days = document.querySelectorAll(".day");
 		        for (const day of days) {
-				const curr_inn = day.innerHTML;
 				day.addEventListener('mouseover', function(event) {
+					const curr_inn = day.innerHTML;
 					day.innerHTML = "University Name";
-				}
+				});
 				div.addEventListener('mouseout', function() {
       					day.innerHTML = curr_in;
     				});
