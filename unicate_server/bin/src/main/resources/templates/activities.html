@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Activities</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    .activity-link {
+      font-size: 18px;
+      display: block;
+      margin-bottom: 10px;
+    }
+    body {
+      background-image: url("Background.png");
+      background-size: cover;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-left">
+      <a href="home.html" class="nav-link">Campfire</a>
+    </div>
+    <div class="navbar-right">
+      <!-- filled by navbar.js -->
+    </div>
+  </nav>
+  <h1>Explore Activities</h1>
+  <div id="activity-list"></div>
+
+  <script>
+    async function loadActivities() {
+      try {
+        const res = await fetch("http://localhost:8080/api/activities"); // placeholder for now
+        const activities = await res.json();
+        const container = document.getElementById("activity-list");
+
+        activities.forEach(activity => {
+          const link = document.createElement("a");
+          link.href = `post.html?actId=${activity.actID}`;
+          link.textContent = `${activity.actName} (${activity.university.universityName})`;
+          link.className = "activity-link";
+          container.appendChild(link);
+        });
+      } catch (error) {
+        console.error("Error loading activities:", error);
+      }
+    }
+
+    window.addEventListener("DOMContentLoaded", loadActivities);
+  </script>
+</body>
+</html>

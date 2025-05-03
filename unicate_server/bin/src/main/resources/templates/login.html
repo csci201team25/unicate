@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/navbar.css">
+    <title>LogIn</title>
+    <style>
+        #header {
+            height: 200px;
+            background-position: center;
+            background-size: cover;
+        }
+        h1 {
+            margin-top: 50px;
+            line-height: 200px;
+            font-size: 3em;
+            margin-left: 130px;
+            color: rgb(255, 255, 255);
+            text-shadow: 0px 0px 10px #000;
+        }
+        body {
+            background-image: url("Background.png");
+            background-size: cover;
+            width: 1000px;
+            margin: 0px;
+        }
+        form {
+            margin-top: 25px;
+            margin-right: -550px;
+            margin-left: 150px;
+        }
+        label {
+            color: rgb(255, 255, 255);
+            text-shadow: 0px 0px 10px #000;
+            font-size: 1.5em;
+        }
+        #info {
+            color: rgb(255, 255, 255);
+            text-shadow: 0px 0px 20px #000;
+            font-size: 1.2em;
+            margin-left: 700px;
+            margin-right: -100px;
+        }
+        #content {
+            display: flex;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-left">
+            <a href="home.html" class="nav-link">Campfire</a>
+        </div>
+        <div class="navbar-right">
+            <!-- filled by navbar.js -->
+        </div>
+    </nav>
+
+    <div id="header" class="container-fluid">
+        <div class="row">
+            <h1 class="col-12">Login</h1>
+        </div>
+    </div>
+    <div id="content">
+        <div id="loginForm">
+            <form id="login-form">
+                <div class="mb-3">
+                    <label for="UserName" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="UserName">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password">
+                    <small id="password-error" class="form-text text-danger"></small>
+                </div>
+                <button id="submit" class="btn btn-primary">Submit</button>
+                <button id="logout" class="btn">Logout</button>
+            </form>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+	document.querySelector("#logout").onclick = function () {
+	    localStorage.clear()
+	    console.log("Logged Out")
+	    window.location.href = "Home.html";
+	}
+	document.querySelector("#submit").onclick = function () {
+	    let submission = true
+            const name = document.querySelector("#UserName").value.trim()
+            const password = document.querySelector("#password").value.trim()
+            if (/^$/.test(name) || /^$/.test(password)) {
+            	submission = false
+                document.querySelector("#password-error").innerHTML = "Values cannot be empty."
+            }
+            else {
+                document.querySelector("#password-error").innerHTML = ""
+            }
+        	if (submission) {
+	        	$.ajax({
+	                url: "LoginVerify",
+	                type: "POST",
+	                datatype: 'text',
+	                data: {
+	                	Username: name,
+	                	Password: password
+	                },
+	                success: function (data) {
+	                    if (data === "verified") {
+	                    	localStorage.setItem("login", "yes");
+	                    	console.log("Logged In")
+				localStorage.setItem("username", "" + name);
+	                	window.location.href = "add-university.html";
+	                    }
+	                    else {
+	                    	document.querySelector("#password-error").innerHTML = "Incorrect Information."
+	                    }
+			    	},
+		            error: function (e) {
+		                console.log("AJAX Error")
+		            }
+	            })
+        	}
+            return false;
+        }
+    </script>
+
+    <script src="navbar.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <link
+    rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" >
+
+  <title>Register</title>
+
+  <style>
+    #header {
+      height: 200px;
+      background-position: center;
+      background-size: cover;
+    }
+    h1 {
+      margin-top: 50px;
+      line-height: 200px;
+      font-size: 3em;
+      margin-left: 130px;
+      color: #fff;
+      text-shadow: 0 0 10px #000;
+    }
+    body {
+      background-image: url("Background.png");
+      background-size: cover;
+      width: 1000px;
+      margin: 0;
+    }
+    #content {
+      display: flex;
+    }
+    #registerForm {
+      margin-top: 25px;
+      margin-left: 150px;
+    }
+    label {
+      color: #fff;
+      text-shadow: 0 0 10px #000;
+      font-size: 1.5em;
+    }
+    #info {
+      color: #fff;
+      text-shadow: 0 0 20px #000;
+      font-size: 1.2em;
+      margin-left: 50px;
+      margin-top: 25px;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="navbar-left">
+        <a href="home.html" class="nav-link">Campfire</a>
+    </div>
+    <div class="navbar-right">
+    </div>
+</nav>
+  <div id="header" class="container-fluid">
+    <div class="row">
+      <h1 class="col-12">Register</h1>
+    </div>
+  </div>
+
+  <div id="content" class="container-fluid">
+    <div id="registerForm" class="col-md-5">
+ 
+      <form id="register-form" action="RegisterVerify" method="post">
+        <div class="mb-3">
+          <label for="UserName" class="form-label">Username</label>
+          <input type="text" class="form-control" id="UserName" name="UserName" placeholder="Enter your username">
+          <small id="UserName-error" class="form-text text-danger"></small>
+        </div>
+
+        <div class="mb-3">
+          <label for="Email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="Email" name="Email" placeholder="name@example.com">
+          <small id="Email-error" class="form-text text-danger"></small>
+        </div>
+
+        <div class="mb-3">
+          <label for="Password" class="form-label">Password</label>
+          <input type="password" class="form-control" id="Password" name="Password" placeholder="Create a password">
+          <small id="Password-error" class="form-text text-danger"></small>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Register</button>
+      </form>
+    </div> 
+
+    <div id="info" class="col-md-6">
+      <p> Welcome! Sign up here to save your favorite schools and find matching
+        vacation dates.<br>
+        Already have an account? <a href="Login.html" class="text-light">Login here</a>.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    document.querySelector("#register-form").onsubmit = function(event) {
+      event.preventDefault(); 
+      let isValid = true; // checkpoint
+
+      const user = document.querySelector("#UserName");
+      if (!user.value.trim()) {
+        isValid = false;
+        document.querySelector("#UserName-error").innerText = "Username cannot be empty.";
+      } 
+      else {
+        document.querySelector("#UserName-error").innerText = "";
+      }
+
+      const emailName = document.querySelector("#Email");
+      const email = emailName.value.trim();
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        isValid = false;
+        document.querySelector("#Email-error").innerText = "Please enter a valid email address.";
+      } 
+      else {
+        document.querySelector("#Email-error").innerText = "";
+      }
+
+      const passEl = document.querySelector("#Password");
+      if (!passEl.value.trim()) {
+        isValid = false;
+        document.querySelector("#Password-error").innerText = "Password cannot be empty.";
+      } 
+      else {
+        document.querySelector("#Password-error").innerText = "";
+      }
+
+      if (isValid) {
+        this.submit();
+      }
+    };
+  </script>
+</body>
+</html>

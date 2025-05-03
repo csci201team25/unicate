@@ -194,14 +194,14 @@ h6 {
     border: 1px solid white;
 }
 .action-button.maroon {
-    background-color: rgb(131, 11, 11);
+    background-color: rgb(131, 11, 11, 0.7);
     color: white;
 }
 .action-button.maroon:hover {
     color: rgb(131, 11, 11);
 }
 .action-button.grey{
-    background-color: rgb(31, 31, 31);
+    background-color: rgb(31, 31, 31, 0.7);
     color: white;
 }
 .action-button.grey:hover {

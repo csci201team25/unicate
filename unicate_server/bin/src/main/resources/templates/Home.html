@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Home</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/navbar.css">
+  <link rel="stylesheet" href="/styles.css">
+  <style>
+    body {
+      background-image: url("Background.png");
+      background-size: cover;
+      background-position: center;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #header {
+      height: 200px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #header h1 {
+      color: white;
+      text-shadow: 0 0 10px #000;
+      font-size: 3rem;
+      text-align: center;
+    }
+
+    #content {
+      text-align: center;
+    }
+
+    #sparking {
+      background-color: rgb(60, 24, 14);
+    }
+
+    .btn {
+      width: 200px;
+      margin: 15px;
+    }
+
+    hr {
+      width: 60%;
+      border: 2px solid rgb(206, 125, 27);
+      margin: 20px auto;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="navbar-left">
+      <a href="home.html" class="nav-link">Campfire</a>
+    </div>
+    <div class="navbar-right">
+      <!-- filled by navbar.js -->
+    </div>
+  </nav>
+
+  <div id="header">
+    <h1>Welcome to Campfire</h1>
+  </div>
+  <div id="info">
+    <p>
+        Welcome! This is a web application where students can input a list of school names to output the calendars for those schools. The program will also compare the available vacation times on the calendars to output a list of dates during which school vacation days overlap. The program will also check the surrounding locations for each school to find potential meeting locations. Users are required to login to save the output information and make posts about their vacation locations. 
+    </p>
+           <!-- <a href="AddSchool.html">Add Universities</a>. -->
+        <!-- i don't think we need the above link? bc of 'spark something' -->
+  </div>
+
+  <div id="content">
+    <a href="AddSchool.html" class="action-button maroon">Spark Something</a>
+    <!-- <form action="AddSchool.html">
+      <button id="sparking" type="submit" class="btn btn-primary">Spark Something</button>
+    </form> -->
+
+    <hr />
+    <a href="activities.html" class="action-button grey">Explore Activities</a>
+
+    <!-- <form action="activities.html">
+      <button type="submit" class="btn btn-secondary">Explore Activities</button>
+    </form> -->
+  </div>
+
+  <script src="navbar.js"></script>
+</body>
+</html>
