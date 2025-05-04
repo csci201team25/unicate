@@ -63,7 +63,7 @@ public class CalendarServlet extends HttpServlet {
 			}
 			// SQL query if the user isn't logged in (getting universities from URL in the form of uni IDs)
 			else {
-				List<String> universityIDs = new ArrayList<>();
+				List<String> universityIDs = new LinkedList<>();
 				universityIDs.add(request.getParameter("uni1"));
 				universityIDs.add(request.getParameter("uni2"));
 				universityIDs.add(request.getParameter("uni3"));
