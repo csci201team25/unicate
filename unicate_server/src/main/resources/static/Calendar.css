@@ -112,5 +112,10 @@ h2 {
 }
 
 .activities-button:hover {
-  background-color: rgb(62, 113, 159);
+    background-color: rgb(62, 113, 159);
+}
+
+.activities_container {
+    text-align: center; 
+    margin-top: 40px;
 }
