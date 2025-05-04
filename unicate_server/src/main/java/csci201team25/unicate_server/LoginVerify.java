@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import com.google.gson.Gson;
 
@@ -26,7 +27,7 @@ public class LoginVerify extends HttpServlet {
 		String username = request.getParameter("Username");
 		String password = request.getParameter("Password");
 
-		Map<String, Object> result = new HashMap<>();
+		Map<String, Object> result = new TreeMap<>();
 
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
