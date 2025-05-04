@@ -16,10 +16,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @WebServlet("/CalendarServlet")
 public class CalendarServlet extends HttpServlet {
@@ -36,12 +33,10 @@ public class CalendarServlet extends HttpServlet {
 		// Checking for an active session
 		boolean active_session = false;
 		HttpSession session = request.getSession(false);
-		int userID = 0;
-		if (session != null) {
-			// https://stackoverflow.com/questions/6031278/session-attribute-access-and-converting-to-int
-			userID = (Integer) session.getAttribute("userID");
-			active_session = true;
-		}
+		
+		String userID = request.getParameter("userID");
+		System.out.println("userID: <" + userID + ">");
+		
 
 		// Variable information
 		String overlap_event = "Spring Break";
@@ -57,7 +52,7 @@ public class CalendarServlet extends HttpServlet {
 			
 			String query = "";
 			// SQL query if the user is logged in (getting universities from SQL with userID)
-			if (active_session) {
+			if (userID != null) {
 				query = "SELECT u.UniversityName, u.CalendarDates " +
 	                    "FROM UserUniversity uu " +
 	                    "JOIN Universities u ON uu.uniID = u.uniID " +
@@ -65,7 +60,7 @@ public class CalendarServlet extends HttpServlet {
 			}
 			// SQL query if the user isn't logged in (getting universities from URL in the form of uni IDs)
 			else {
-				List<String> universityIDs = new ArrayList<>();
+				List<String> universityIDs = new LinkedList<>();
 				universityIDs.add(request.getParameter("uni1"));
 				universityIDs.add(request.getParameter("uni2"));
 				universityIDs.add(request.getParameter("uni3"));

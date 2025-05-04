@@ -33,5 +33,10 @@ public class ServletConfiguration {
     public ServletRegistrationBean<AddUniversitiesServlet> addUniversitiesServletServletRegistrationBean() {
         return new ServletRegistrationBean<>(new AddUniversitiesServlet(), "/AddUniversitiesServlet");
     }
+    
+    @Bean
+    public ServletRegistrationBean<UserUniversityServlet> userUniversityServletServletRegistrationBean() {
+        return new ServletRegistrationBean<>(new UserUniversityServlet(), "/UserUniversityServlet");
+    }
 
 }

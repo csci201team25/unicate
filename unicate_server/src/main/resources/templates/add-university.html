@@ -1,134 +1,197 @@
 <!DOCTYPE html>
 <html>
-
-<head>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/navbar.css">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="/navbar.css" />
     <title>Universities</title>
     <style>
-        #header {
-            height: 200px;
-            background-position: center;
-            background-size: cover;
-        }
-        h1 {
-            margin-top: 50px;
-            line-height: 200px;
-            font-size: 3em;
-            text-align: center;
-            margin-left: 150px;
-            color: rgb(255, 255, 255);
-            text-shadow: 0px 0px 10px #000000;
-        }
-        body {
-            background-image: url("Background.png");
-            background-size: cover;
-            width: 1000px;
-            margin: 0px;
-        }
-        form {
-            margin-top: 125px;
-            margin-left: 550px;
-        }
-        #line {
-            margin-left: -250px;
-            margin-top: -100px;
-        }
-        label {
-            color: rgb(255, 255, 255);
-            text-shadow: 0px 0px 10px #000;
-            font-size: 1.5em;
-        }
-        #submission {
-            background-color: rgb(60, 24, 14);
-            margin-bottom: 100px;
-            margin-top: 25px;
-        }
-        #login-text {
-            color: white;
-            margin-left: -100px;
-            margin-bottom: 50px;
-        }
-        .inputs {
-            margin-top: -10px;
-            margin-left: -250px;
-            margin-bottom: 25px;
-        }
+      #header {
+        height: 200px;
+        background-position: center;
+        background-size: cover;
+      }
+      h1 {
+        margin-top: 50px;
+        line-height: 200px;
+        font-size: 3em;
+        text-align: center;
+        margin-left: 150px;
+        color: rgb(255, 255, 255);
+        text-shadow: 0px 0px 10px #000000;
+      }
+      body {
+        background-image: url("Background.png");
+        background-size: cover;
+        width: 1000px;
+        margin: 0px;
+      }
+      form {
+        margin-top: 125px;
+        margin-left: 550px;
+      }
+      #line {
+        margin-left: -250px;
+        margin-top: -100px;
+      }
+      label {
+        color: rgb(255, 255, 255);
+        text-shadow: 0px 0px 10px #000;
+        font-size: 1.5em;
+      }
+      #submission {
+        background-color: rgb(60, 24, 14);
+        margin-bottom: 100px;
+        margin-top: 25px;
+      }
+      #login-text {
+        color: white;
+        margin-left: -100px;
+        margin-bottom: 50px;
+      }
+      .inputs {
+        margin-top: -10px;
+        margin-left: -250px;
+        margin-bottom: 25px;
+      }
     </style>
     <script>
-    	document.addEventListener("DOMContentLoaded", function() {
-        	if(localStorage.getItem("login") === "yes"){
-        		const logintest = document.getElementById("login-text");
-                logintest.style.display = 'none';
-        	}
-            else{
-        		const logintest = document.getElementById("login-text");
-                logintest.style.display = 'inline';
-            }
-    	})
-	</script>
-</head>
+      document.addEventListener("DOMContentLoaded", function () {
+        if (localStorage.getItem("login") === "yes") {
+          const logintest = document.getElementById("login-text");
+          logintest.style.display = "none";
+        } else {
+          const logintest = document.getElementById("login-text");
+          logintest.style.display = "inline";
+        }
+      });
+    </script>
+  </head>
 
-<body>
+  <body>
     <nav class="navbar">
-        <div class="navbar-left">
-            <a href="home.html" class="nav-link">Campfire</a>
-        </div>
-        <div class="navbar-right">
-            <!-- filled by navbar.js -->
-        </div>
+      <div class="navbar-left">
+        <a href="home.html" class="nav-link">Campfire</a>
+      </div>
+      <div class="navbar-right">
+        <!-- filled by navbar.js -->
+      </div>
     </nav>
 
     <div id="header" class="container-fluid">
-        <div class="row">
-            <h1 class="col-12">Add Universities</h1>
-        </div>
+      <div class="row">
+        <h1 class="col-12">Add Universities</h1>
+      </div>
     </div>
     <div id="content">
-        <div id="loginForm">
-            <form id="login-form" action="calendar.html" method="get">
-                <hr id="line" style="height:2px;border-width:10px;color:rgb(206, 125, 27);background-color:rgb(206, 125, 27)">
-                <p id="login-text">If you would like to save your work, click here to 
-                    <a href="Login.html">Login</a>.
-                </p>
-                <div class="inputs">
-                    <label for="Name1" class="form-label">School 1</label>
-                    <select name="uni1" class="form-control" id="Name1"><option value=0>Select...</option></select>
-                </div>
-                <div class="inputs">
-                    <label for="Name2" class="form-label">School 2</label>
-                    <select name="uni2" class="form-control" id="Name2"><option value=0>Select...</option></select>
-                </div>
-                <div class="inputs">
-                    <label for="Name3" class="form-label">School 3</label>
-                    <select name="uni3" class="form-control" id="Name3"><option value=0>Select...</option></select>
-                </div>
-		<div class="inputs">
-                    <label for="Name4" class="form-label">School 4</label>
-                    <select name="uni4" class="form-control" id="Name4"><option value=0>Select...</option></select>
-                </div>
-                <div class="inputs">
-                    <label for="Name5" class="form-label">School 5</label>
-                    <select name="uni5" class="form-control" id="Name5"><option value=0>Select...</option></select>
-                </div>
-                <button id="submission" type="submit" class="btn btn-primary">Submit Universities</button>
-            </form>
-        </div>
+      <div id="loginForm">
+        <form id="login-form" action="calendar.html" method="get">
+          <hr
+            id="line"
+            style="
+              height: 2px;
+              border-width: 10px;
+              color: rgb(206, 125, 27);
+              background-color: rgb(206, 125, 27);
+            "
+          />
+          <p id="login-text">
+            If you would like to save your work, click here to
+            <a href="Login.html">Login</a>.
+          </p>
+          <div class="inputs">
+            <label for="Name1" class="form-label">School 1</label>
+            <select name="uni1" class="form-control" id="Name1">
+              <option value="0">Select...</option>
+            </select>
+          </div>
+          <div class="inputs">
+            <label for="Name2" class="form-label">School 2</label>
+            <select name="uni2" class="form-control" id="Name2">
+              <option value="0">Select...</option>
+            </select>
+          </div>
+          <div class="inputs">
+            <label for="Name3" class="form-label">School 3</label>
+            <select name="uni3" class="form-control" id="Name3">
+              <option value="0">Select...</option>
+            </select>
+          </div>
+          <div class="inputs">
+            <label for="Name4" class="form-label">School 4</label>
+            <select name="uni4" class="form-control" id="Name4">
+              <option value="0">Select...</option>
+            </select>
+          </div>
+          <div class="inputs">
+            <label for="Name5" class="form-label">School 5</label>
+            <select name="uni5" class="form-control" id="Name5">
+              <option value="0">Select...</option>
+            </select>
+          </div>
+          <button id="submission" type="submit" class="btn btn-primary">
+            Submit Universities
+          </button>
+        </form>
+      </div>
     </div>
-<script>
-	// Fetching from backend AddUniversitiesServlet
-	fetch('/AddUniversitiesServlet')
-		.then(response => response.json())
-		.then(data => {
-	    		// Populating dropdown options with all universities in the database
-		    	for (let i = 1; i < 6; i++) {
-				const element = document.getElementById('Name' + i);
-		        	for (let id in data) {
-		        		element.innerHTML += '<option value="' + id + '">' + data[id] + '</option>';
-		        	}
-	          	}
-		})
-		.catch(error => console.error('Error:', error));
-</script>
-</body>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script>
+      if (localStorage.getItem("login") === "yes") {
+        document
+          .getElementById("login-form")
+          .addEventListener("submit", function (e) {
+            e.preventDefault();
+            const name1 = $("#Name1").val().trim();
+            const name2 = $("#Name2").val().trim();
+            const name3 = $("#Name3").val().trim();
+            const name4 = $("#Name4").val().trim();
+            const name5 = $("#Name5").val().trim();
+            const userID = localStorage.getItem("userId");
+            $.ajax({
+              url: "UserUniversityServlet",
+              type: "GET",
+              datatype: "text",
+              data: {
+                userId: userID,
+                uni1: name1,
+                uni2: name2,
+                uni3: name3,
+                uni4: name4,
+                uni5: name5,
+              },
+              success: function (data) {
+                if (data === "verified") {
+                  $("#login-form")[0].submit();
+                } else {
+                  alert("Error.");
+                }
+              },
+              error: function (e) {
+                console.log("AJAX Error");
+              },
+            });
+          });
+      }
+
+      // Fetching from backend AddUniversitiesServlet
+      fetch("/AddUniversitiesServlet")
+        .then((response) => response.json())
+        .then((data) => {
+          // Populating dropdown options with all universities in the database
+          for (let i = 1; i < 6; i++) {
+            const element = document.getElementById("Name" + i);
+            for (let id in data) {
+              element.innerHTML +=
+                '<option value="' + id + '">' + data[id] + "</option>";
+            }
+          }
+        })
+        .catch((error) => console.error("Error:", error));
+    </script>
+  </body>
 </html>
