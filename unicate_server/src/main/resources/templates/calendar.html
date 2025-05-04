@@ -114,6 +114,8 @@
           // tallying the days that are in Spring Break
           const date_counts = new Map();
           const uni_day_map = new Map();
+          const break_valid = new Set();
+          
           var num_universities = Object.keys(data).length;
 
           for (const key in data) {
@@ -122,6 +124,7 @@
             const range = get_days_array(start, end);
             for (const date of range) {
               date_counts.set(date, (date_counts.get(date) || 0) + 1);
+              break_valid.add(date);
               if (!uni_day_map.has(date)) {
                 uni_day_map.set(date, []);
               }
@@ -140,7 +143,7 @@
             const tally = date_counts.get(date) || 0;
 
             // not a break day
-            if (tally == 0) continue;
+            if (!break_valid.has(date)) continue;
             // full overlap
             else if (tally == num_universities) {
               day.classList.add("overlap-day");
