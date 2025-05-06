@@ -25,6 +25,22 @@ public class RegisterVerify extends HttpServlet {
             Class.forName("com.mysql.cj.jdbc.Driver");
 
             conn = DriverManager.getConnection("jdbc:mysql://localhost/unicate?user=root&password=root");
+
+            String username = request.getParameter("UserName");
+            String password = request.getParameter("Password");
+            
+            // check if username already exists
+            String checkSql = "SELECT COUNT(*) FROM Users WHERE Username = ?";
+            checkPs = conn.prepareStatement(checkSql);
+            checkPs.setString(1, username);
+
+            var rs = checkPs.executeQuery();
+            if (rs.next() && rs.getInt(1) > 0) {
+                // username already exists
+                response.sendRedirect("Register.html?error=email_exists");
+                return;
+            }
+
             // hardcoding the db details again; subject to change again
             String sql = "INSERT INTO Users (Username, HashedPassword) VALUES (?, ?)";
             ps = conn.prepareStatement(sql);
