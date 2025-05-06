@@ -31,7 +31,7 @@ public class RegisterVerify extends HttpServlet {
             
             // check if username already exists
             String checkSql = "SELECT COUNT(*) FROM Users WHERE Username = ?";
-            checkPs = conn.prepareStatement(checkSql);
+            PreparedStatement checkPs = conn.prepareStatement(checkSql);
             checkPs.setString(1, username);
 
             var rs = checkPs.executeQuery();
@@ -52,7 +52,7 @@ public class RegisterVerify extends HttpServlet {
 
             ps.executeUpdate();
             // relatively simple registration verification
-            response.sendRedirect("add-university.html");
+            response.sendRedirect("login.html");
             return;
 
         } 
