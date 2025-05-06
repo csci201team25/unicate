@@ -28,7 +28,7 @@ public class RegisterVerify extends HttpServlet {
 
             String username = request.getParameter("UserName");
             String password = request.getParameter("Password");
-
+            
             // check if username already exists
             String checkSql = "SELECT COUNT(*) FROM Users WHERE Username = ?";
             checkPs = conn.prepareStatement(checkSql);
@@ -36,11 +36,10 @@ public class RegisterVerify extends HttpServlet {
 
             var rs = checkPs.executeQuery();
             if (rs.next() && rs.getInt(1) > 0) {
-                response.setContentType("text/plain");
-                response.getWriter().write("email_exists");
+                // username already exists
+                response.sendRedirect("Register.html?error=email_exists");
                 return;
             }
-            ps.close();
 
             // hardcoding the db details again; subject to change again
             String sql = "INSERT INTO Users (Username, HashedPassword) VALUES (?, ?)";

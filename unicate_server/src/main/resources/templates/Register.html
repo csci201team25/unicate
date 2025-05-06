@@ -98,66 +98,43 @@
   </div>
   <script src="/navbar.js"></script>
   <script>
-    document.querySelector("#register-form").onsubmit = async function (event) {
-      event.preventDefault();
-      let isValid = true;
-  
+    document.querySelector("#register-form").onsubmit = function(event) {
+      event.preventDefault(); 
+      let isValid = true; // checkpoint
+
       const user = document.querySelector("#UserName");
-      const emailEl = document.querySelector("#Email");
-      const passEl = document.querySelector("#Password");
-  
-      const userVal = user.value.trim();
-      const emailVal = emailEl.value.trim();
-      const passVal = passEl.value.trim();
-  
-      // clear all error messages first
-      document.querySelector("#UserName-error").innerText = "";
-      document.querySelector("#Email-error").innerText = "";
-      document.querySelector("#Password-error").innerText = "";
-  
-      if (!userVal) {
+      if (!user.value.trim()) {
         isValid = false;
         document.querySelector("#UserName-error").innerText = "Username cannot be empty.";
+      } 
+      else {
+        document.querySelector("#UserName-error").innerText = "";
       }
-  
+
+      const emailName = document.querySelector("#Email");
+      const email = emailName.value.trim();
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(emailVal)) {
+      if (!emailRegex.test(email)) {
         isValid = false;
         document.querySelector("#Email-error").innerText = "Please enter a valid email address.";
+      } 
+      else {
+        document.querySelector("#Email-error").innerText = "";
       }
-  
-      if (!passVal) {
+
+      const passEl = document.querySelector("#Password");
+      if (!passEl.value.trim()) {
         isValid = false;
         document.querySelector("#Password-error").innerText = "Password cannot be empty.";
+      } 
+      else {
+        document.querySelector("#Password-error").innerText = "";
       }
-  
-      if (!isValid) return;
-  
-      try {
-        const response = await fetch("RegisterVerify", {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: new URLSearchParams({
-            UserName: userVal,
-            Email: emailVal,
-            Password: passVal,
-          }),
-        });
-  
-        const text = await response.text();
-  
-        if (text === "email_exists") {
-          document.querySelector("#Email-error").innerText = "This email is already registered.";
-        } else if (text === "success") {
-          window.location.href = "add-university.html";
-        } else {
-          alert("Registration failed. Please try again.");
-        }
-      } catch (error) {
-        console.error("Registration error:", error);
-        alert("Server error. Please try again later.");
+
+      if (isValid) {
+        this.submit();
       }
     };
-  </script>  
+  </script>
 </body>
 </html>
