@@ -134,6 +134,14 @@
       if (isValid) {
         this.submit();
       }
+
+
+      // check for error message in URL to display red text
+      const params = new URLSearchParams(window.location.search);
+      const error = params.get("error");
+      if (error === "email_exists") {
+        document.querySelector("#Email-error").innerText = "That email is already registered.";
+      }
     };
   </script>
 </body>
