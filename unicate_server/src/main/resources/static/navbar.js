@@ -20,7 +20,7 @@ window.addEventListener("DOMContentLoaded", () => {
       logoutBtn.textContent = "Logout";
       logoutBtn.addEventListener("click", () => {
         localStorage.clear();
-        window.location.href = "login.html";
+        window.location.href = "home.html";
       });
       nav.appendChild(logoutBtn);
     } else {
